@@ -5,47 +5,51 @@ import { auth } from "../../Firebase/firebase-config";
 import { updateProfile } from "firebase/auth";
 
 const Registration = () => {
- const {registerWithPassword,user}=useAuthProvider();
- console.log(user);
- const navigate = useNavigate()
+  const { registerWithPassword, user } = useAuthProvider();
+  const navigate = useNavigate();
+
   const handleRegistration = (e) => {
     e.preventDefault();
     const form = e.target;
     const userName = form.userName.value;
-    const profilePhoto = form.profilePhoto.value; 
+    const profilePhoto = form.profilePhoto.value;
     const emailAdress = form.emailAdress.value;
     const bloodGrupe = form.bloodGrupe.value;
     const districs = form.districs.value;
     const upazilas = form.upazilas.value;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
     registerWithPassword(emailAdress, password)
-    .then((result) => {
-      updateProfile(auth.currentUser, {
-        displayName: userName,
-        displayURL:profilePhoto,
-        bloodGrupe:bloodGrupe,
-        districs:districs,
-        upazilas:upazilas
-        
-      })
-        .then(() => {
-          // Profile updated!
-          // ...
+      .then((result) => {
+        updateProfile(auth.currentUser, {
+          displayName: userName,
+          photoURL: profilePhoto,
+          bloodGrupe: bloodGrupe,
+          districs: districs,
+          upazilas: upazilas
         })
-        .catch((error) => {
-          // An error occurred
-          // ...
-        });
-      alert("Registration Successfull");
-      navigate('/')
-    })
-    .catch((error) => {
-      alert("opps");
-      // ..
-    });
+          .then(() => {
+            alert("Registration Successful");
+            navigate('/');
+          })
+          .catch((error) => {
+            console.error("Error updating profile", error);
+            alert("Failed to update profile");
+          });
+      })
+      .catch((error) => {
+        console.error("Error during registration", error);
+        alert("Registration failed");
+      });
   };
 
+  console.log(user);
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
@@ -92,32 +96,7 @@ const Registration = () => {
               placeholder="Username"
             />
           </div>
-          <div className="relative flex items-center mt-4">
-            <span className="absolute">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                />
-              </svg>
-            </span>
 
-            <input
-              name="profilePhoto"
-              type="text"
-              className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-              placeholder="photourl"
-            />
-          </div>
-{/* 
           <label
             htmlFor="dropzone-file"
             className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900"
@@ -140,7 +119,7 @@ const Registration = () => {
             <h2 className="mx-3 text-gray-400">Profile Photo</h2>
 
             <input id="dropzone-file" type="file" name="profilePhoto" />
-          </label> */}
+          </label>
 
           <div className="relative flex items-center mt-6">
             <span className="absolute">
