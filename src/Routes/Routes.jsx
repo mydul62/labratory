@@ -9,6 +9,7 @@ import DashBoard from "../Layout/DashBoard/DashBoard";
 import AllTest from "../Pages/AllTest/AllTest";
 import PriveteRoutes from "./PriveteRoutes";
 import Profile from "../Pages/MyProfile/Profile";
+import TestDetails from "../Pages/AllTest/TestDetails";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         path: "/alltest",
         element: <AllTest />
+      },
+      {
+        path: "/testdetail/:id",  
+        element: <TestDetails />
       },
       {
         path: "registration",
