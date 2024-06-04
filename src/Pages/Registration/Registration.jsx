@@ -5,9 +5,12 @@ import { auth } from "../../Firebase/firebase-config";
 import { updateProfile } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import axios from 'axios'
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
 const Registration = () => {
   const { registerWithPassword } = useAuthProvider();
   const navigate = useNavigate();
+  const axiosCommon = useAxiosCommon()
    const {data:districs}=useQuery({
    queryKey:"districts",
    queryFn:async()=>{
@@ -58,6 +61,14 @@ const Registration = () => {
           upazilas: upazilas
         })
           .then(() => {
+            const userInfo = {name: userName, emailAdress, bloodGrupe, districs, upazella:upazilas,image:data.data.display_url,status: 'active',role: 'user'};
+            axiosCommon.post("/allusers", userInfo)
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(error => {
+              console.error('Error occurred:', error);
+            });
             alert("Registration Successful");
             navigate('/');
           })

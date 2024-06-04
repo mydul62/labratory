@@ -10,6 +10,8 @@ import AllTest from "../Pages/AllTest/AllTest";
 import PriveteRoutes from "./PriveteRoutes";
 import Profile from "../Pages/MyProfile/Profile";
 import TestDetails from "../Pages/AllTest/TestDetails";
+import ManageUser from "../Layout/DashBoard/DashBoardComponents/ManageUser";
+import AddTest from "../Layout/DashBoard/AddTest";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +50,14 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: <PriveteRoutes><Profile></Profile></PriveteRoutes>
+      },
+      {
+        path: 'manageusers',
+        element: <PriveteRoutes><ManageUser></ManageUser></PriveteRoutes>
+      },
+      {
+        path: 'addtest',
+        element: <PriveteRoutes><AddTest></AddTest></PriveteRoutes>
       },
     ]
   }
