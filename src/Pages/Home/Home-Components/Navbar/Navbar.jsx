@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
    <div className=''>
     <nav className="relative dark:bg-gray-800 ">
-      <div className="container px-6 py-6 mx-auto">
+      <div className="max-w-7xl w-[90%] px-6 py-6 mx-auto">
         <div className="lg:flex lg:items-center lg:justify-between">
           <div className="flex items-center justify-between">
             <a href="#">
@@ -42,6 +42,9 @@ const Navbar = () => {
               <Link to={'/'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 Home
               </Link>
+              <Link to={'/alltest'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                All Test
+              </Link>
               <Link to={'dashboard'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                Dashboard
               </Link>
@@ -49,7 +52,7 @@ const Navbar = () => {
             </div>
             <div className="flex items-center mt-4 lg:mt-0">
               <button
-                className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block dark:text-gray-200 hover:text-[#004552] text-xl text-xldark:hover:text-gray-400 focus:text-[#004552] text-xl text-xldark:focus:text-gray-400 focus:outline-none"
+                className="hidden mx-4 text-gray-600 transition-colors duration-300 transform lg:block dark:text-gray-200 hover:text-[#004552] text-xldark:hover:text-gray-400 focus:text-[#004552] text-xl text-xldark:focus:text-gray-400 focus:outline-none"
                 aria-label="show notifications"
               >
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

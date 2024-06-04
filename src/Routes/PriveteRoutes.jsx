@@ -1,14 +1,22 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuth from "../Hooks/useAuth";
-import FadeLoader from "react-spinners/ClipLoader";
-import LoadingSpinner from "../Shared/LoadingSpinner/LoadingSpinner";
+import useAuthProvider from "../Hooks/useAuthProvider";
 
+import { FidgetSpinner } from 'react-loader-spinner'
 
 const PriveteRoutes = ({children}) => {
-const {user,loading}=useAuth();
+const {user,loading}=useAuthProvider();
 const location = useLocation();
 if(loading){
-return <LoadingSpinner></LoadingSpinner>
+return <div className=" min-h-screen flex justify-center items-center">
+ <FidgetSpinner
+visible={true}
+height="80"
+width="80"
+ariaLabel="fidget-spinner-loading"
+wrapperStyle={{}}
+wrapperClass="fidget-spinner-wrapper"
+/>
+</div>
 }
 if(user){
 return children

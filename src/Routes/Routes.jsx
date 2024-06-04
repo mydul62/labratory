@@ -7,6 +7,8 @@ import Registration from "../Pages/Registration/Registration";
 import Login from "../Pages/Login/Login";
 import DashBoard from "../Layout/DashBoard/DashBoard";
 import AllTest from "../Pages/AllTest/AllTest";
+import PriveteRoutes from "./PriveteRoutes";
+import Profile from "../Pages/MyProfile/Profile";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />
+      },
+      {
+        path: "/alltest",
+        element: <AllTest />
       },
       {
         path: "registration",
@@ -28,12 +34,16 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashBoard />,
+    element: <PriveteRoutes><DashBoard /></PriveteRoutes>,
     children: [
       {
         path: 'alltest',
         element: <AllTest />
-      }
+      },
+      {
+        path: 'profile',
+        element: <PriveteRoutes><Profile></Profile></PriveteRoutes>
+      },
     ]
   }
 ]);

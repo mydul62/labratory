@@ -1,9 +1,12 @@
 import React from 'react';
 import useAuthProvider from '../../Hooks/useAuthProvider';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { SignInWithPassword } = useAuthProvider();
-
+    const navigate = useNavigate();
+const location = useLocation();
+const pathform = location?.state || "/Dashboard";
     const handleSignin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -13,6 +16,7 @@ const Login = () => {
         // Call the SignInWithPassword function with email and password
         SignInWithPassword(email, password)
             .then(response => {
+                navigate(pathform);
                 console.log('User signed in successfully', response);
             })
             .catch(error => {
