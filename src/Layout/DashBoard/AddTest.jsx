@@ -6,37 +6,9 @@ const AddTest = () => {
 
   return (
     <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
-      <form>
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
-          <div className='space-y-6'>
-            
-         
-            <div className='space-y-1 text-sm'>
-              <label htmlFor='category' className='block text-gray-600'>
-                Category
-              </label>
-              <select
-                required
-                className='w-full px-4 py-3 border-rose-300 focus:outline-rose-500 rounded-md'
-                name='category'
-              >
-  
-                  <option >Cardiology </option>
-                  <option value=""> Computer diagnostic</option>
-                  <option value=""> Massage</option>
-                  <option value=""> Neurosurgery</option>
-                  <option value=""> Uncategorized</option>
-                  <option value=""> Urology</option>
-              </select>
-            </div>
-            <DatePicker className=" block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" selected={startDate} onChange={(date) => setStartDate(date)} />
-            <div className='space-y-1'>
-              <label htmlFor='location' className='block text-gray-600'>
-                Select Availability Range
-              </label>
-              {/* Calender */}
-            </div>
-          </div>
+      <form className=" w-[60%] mx-auto">
+        <div className=''>
+        
           <div className='space-y-6'>
             <div className='space-y-1 text-sm'>
               <label htmlFor='title' className='block text-gray-600'>
@@ -72,7 +44,7 @@ const AddTest = () => {
               </div>
             </div>
             <div className='flex justify-between gap-2'>
-              <div className='space-y-1 text-sm'>
+              <div className='space-y-1 w-full text-sm'>
                 <label htmlFor='price' className='block text-gray-600'>
                   Price
                 </label>
@@ -86,7 +58,7 @@ const AddTest = () => {
                 />
               </div>
 
-              <div className='space-y-1 text-sm'>
+              <div className='space-y-1 w-full text-sm'>
                 <label htmlFor='guest' className='block text-gray-600'>
                  Total Slots
                 </label>
@@ -101,39 +73,35 @@ const AddTest = () => {
               </div>
             </div>
 
-            <div className='flex justify-between gap-2'>
-              <div className='space-y-1 text-sm'>
-                <label htmlFor='bedrooms' className='block text-gray-600'>
-                  Bedrooms
-                </label>
-                <input
-                  className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
-                  name='bedrooms'
-                  id='bedrooms'
-                  type='number'
-                  placeholder='Bedrooms'
-                  required
-                />
-              </div>
+            <div className='flex items-center justify-between gap-2'>
+            <div className='space-y-1 w-full text-sm'>
+              <label htmlFor='category' className='block text-gray-600'>
+                Category
+              </label>
+              <select
+                required
+                className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
+                name='category'
+              >
+  
+                  <option >Cardiology </option>
+                  <option value=""> Computer diagnostic</option>
+                  <option value=""> Massage</option>
+                  <option value=""> Neurosurgery</option>
+                  <option value=""> Uncategorized</option>
+                  <option value=""> Urology</option>
+              </select>
+            </div>
 
-              <div className='space-y-1 text-sm'>
-                <label htmlFor='bathrooms' className='block text-gray-600'>
-                  Bathrooms
-                </label>
-                <input
-                  className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md '
-                  name='bathrooms'
-                  id='bathrooms'
-                  type='number'
-                  placeholder='Bathrooms'
-                  required
-                />
+
+              <div className='space-y-1 w-full text-sm'>
+              <DatePicker className=" flex items-center w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md " selected={startDate} onChange={(date) => setStartDate(date)} />
               </div>
             </div>
 
             <div className='space-y-1 text-sm'>
               <label htmlFor='description' className='block text-gray-600'>
-                Description
+                Details
               </label>
 
               <textarea
