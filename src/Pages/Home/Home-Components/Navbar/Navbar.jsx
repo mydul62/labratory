@@ -66,7 +66,7 @@ const Navbar = () => {
                 {
                 user?<div className=' flex md:flex-row flex-col gap-4'>
                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
-                <Link > <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" className="object-cover w-full h-full" alt="avatar" /></Link>
+                <Link > <img src={user?.photoURL} alt="avatar" /></Link>
                  
                 </div>
                 <button onClick={()=>logout()}  className=' btn'> Logout</button>

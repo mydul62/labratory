@@ -3,23 +3,46 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuthProvider from "../../Hooks/useAuthProvider";
 import { auth } from "../../Firebase/firebase-config";
 import { updateProfile } from "firebase/auth";
-
+import { useQuery } from "@tanstack/react-query";
+import axios from 'axios'
 const Registration = () => {
-  const { registerWithPassword, user } = useAuthProvider();
+  const { registerWithPassword } = useAuthProvider();
   const navigate = useNavigate();
-
-  const handleRegistration = (e) => {
+   const {data:districs}=useQuery({
+   queryKey:"districts",
+   queryFn:async()=>{
+   const {data}=await axios.get("http://localhost:5000/district");
+   return data;
+   }
+   })
+   const {data:upazillas}=useQuery({
+   queryKey:"upazillas",
+   queryFn:async()=>{
+   const {data}=await axios.get("http://localhost:5000/upazillas");
+   return data;
+   }
+   })
+  
+  const handleRegistration =async (e) => {
     e.preventDefault();
     const form = e.target;
     const userName = form.userName.value;
-    const profilePhoto = form.profilePhoto.value;
+    const profilePhoto = form.profilePhoto.files[0];
     const emailAdress = form.emailAdress.value;
     const bloodGrupe = form.bloodGrupe.value;
     const districs = form.districs.value;
     const upazilas = form.upazilas.value;
     const password = form.password.value;
     const confirmPassword = form.confirmPassword.value;
-
+    const formData = new FormData();
+    formData.append("image", profilePhoto);
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_iMGBB_API_KEY}`,
+      formData
+    )
+    console.log(data.data.display_url); 
+  
+  
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -29,7 +52,7 @@ const Registration = () => {
       .then((result) => {
         updateProfile(auth.currentUser, {
           displayName: userName,
-          photoURL: profilePhoto,
+          photoURL: data.data.display_url,
           bloodGrupe: bloodGrupe,
           districs: districs,
           upazilas: upazilas
@@ -49,7 +72,6 @@ const Registration = () => {
       });
   };
 
-  console.log(user);
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
@@ -178,10 +200,11 @@ const Registration = () => {
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             >
               <option selected disabled value="District">District</option>
-              <option value="Dhaka">Dhaka</option>
-              <option value="Kurigram">Kurigram</option>
-              <option value="Nilphamari">Nilphamari</option>
-              <option value="Chittagong">Chittagong</option>
+              {
+              districs?.map(district =>(
+                <option key={district?._id} value={`${district?.name}`} >{district?.name}</option>
+              ))
+              }
             </select>
           </div>
 
@@ -194,11 +217,12 @@ const Registration = () => {
               name="upazilas"
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             >
-              <option selected disabled value="upazila">Upazila</option>
-              <option value="Dhaka">Dhaka</option>
-              <option value="Kurigram">Kurigram</option>
-              <option value="Nilphamari">Nilphamari</option>
-              <option value="Chittagong">Chittagong</option>
+              <option selected disabled value="upazila">Upazilas</option>
+              {
+              upazillas?.map(upazilla =>(
+                <option key={upazilla?._id} value={`${upazilla?.name}`} >{upazilla?.name}</option>
+              ))
+              }
             </select>
           </div>
 

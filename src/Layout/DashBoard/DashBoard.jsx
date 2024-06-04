@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import useAuthProvider from "../../Hooks/useAuthProvider";
 
 const DashBoard = () => {
 const [dashboard,setDashboard]=useState(true)
-
+const {user,logout}=useAuthProvider()
 const handleDashboard =()=>{
   setDashboard(!dashboard);
 }
@@ -23,7 +24,7 @@ const handleDashboard =()=>{
                   <img className="w-auto h-6" src="https://merakiui.com/images/logo.svg" alt=""/>
               </a>
   
-              <NavLink to={'/'} href="#" className="p-1.5 inline-block text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
+              <NavLink to={'/'}  href="#" className="p-1.5 inline-block text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                   </svg>
@@ -45,14 +46,14 @@ const handleDashboard =()=>{
   
           <div className="flex flex-col items-center mt-4 overflow-y-auto space-y-4">
               <a href="#">
-                  <img className="object-cover w-8 h-8 rounded-lg" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&h=634&q=80" alt="avatar" />
+                  <img className="object-cover w-8 h-8 rounded-lg" src={user?.photoURL} alt="avatar" />
               </a>
   
-              <a href="#" className="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400">
+              <button onClick={()=>logout()} href="#" className="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
                   </svg>
-              </a>
+              </button>
           </div>
       </div>
       
@@ -76,7 +77,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">Dashboard</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">Dashboard</span>
                   </NavLink>
   
                   <NavLink className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
@@ -84,7 +85,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">My Profile</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">My Profile</span>
                   </NavLink>
               </div>
   
@@ -96,7 +97,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">Upcoming appointments</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">Upcoming appointments</span>
                   </NavLink>
   
                   <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
@@ -104,7 +105,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">test Result</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">test Result</span>
                   </a>
               </div>
   
@@ -116,7 +117,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">All test</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">All test</span>
                   </NavLink>
   
                   <a className="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="#">
@@ -125,7 +126,7 @@ const handleDashboard =()=>{
                           <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
   
-                      <span className="mx-2 text-sm font-medium">Setting</span>
+                      <span onClick={()=>setDashboard(true)} className="mx-2 text-sm font-medium">Setting</span>
                   </a>
               </div>
           </nav>
