@@ -1,9 +1,21 @@
 // import { Helmet } from 'react-helmet-async'
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Button, Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react'
+import { useState } from 'react'
 
 const ManageUser = () => {
 const axiosSecure = useAxiosSecure()
+let [isOpen, setIsOpen] = useState(true)
+
+function open() {
+  setIsOpen(true)
+}
+
+function close() {
+  setIsOpen(false)
+}
+
   const {data:users}=useQuery({
     queryKey:"users",
     queryFn:async()=>{

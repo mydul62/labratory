@@ -6,7 +6,7 @@ const AddTest = () => {
 
   return (
     <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
-      <form className=" w-[60%] mx-auto">
+      <form className=" md:w-[60%] mx-auto">
         <div className=''>
         
           <div className='space-y-6'>
@@ -95,7 +95,10 @@ const AddTest = () => {
 
 
               <div className='space-y-1 w-full text-sm'>
-              <DatePicker className=" flex items-center w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md " selected={startDate} onChange={(date) => setStartDate(date)} />
+              <label htmlFor='category' className='block text-gray-600'>
+                Date
+              </label>
+              <DatePicker className=" flex items-center w-full px-4 md:px-32 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md " selected={startDate} onChange={(date) => setStartDate(date)} />
               </div>
             </div>
 

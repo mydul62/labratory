@@ -54,7 +54,7 @@ const AllTest = () => {
                 </div>
                 <div className="flex flex-col justify-between space-y-4 py-6 md:py-6 md:p-0 p-3 lg:mx-6">
                     <a href="#" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                        {data?.title.slice(0,60)}...
+                        {data?.title?.slice(0,60)}...
                     </a>
                     
                     <div className=" flex items-center justify-between">
