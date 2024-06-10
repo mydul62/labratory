@@ -35,7 +35,7 @@ const UpdateProfileModal = ({ setIsEditModalOpen, isOpen }) => {
       <Dialog
         as='div'
         className='relative z-10'
-        onClose={() => setIsEditModalOpen(true)}
+        onClose={() => setIsEditModalOpen(false)}
       >
         <TransitionChild
           as={Fragment}

@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { sliderSettings } from "./Utils/common";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import useAuthProvider from "../../../../Hooks/useAuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import FeaturesTitle from "./FeaturesTitle";
 import useAxiosCommon from "../../../../Hooks/useAxiosCommon";
@@ -15,13 +13,14 @@ import useAxiosCommon from "../../../../Hooks/useAxiosCommon";
 const FeaturesTest = () => {
   const [swiper, setSwiper] = useState(null);
   const axiosCommpn = useAxiosCommon()
-    const {data:appointments}=useQuery({
+    const {data:Datas}=useQuery({
       queryKey:["appoinments"],
       queryFn:async()=>{
       const {data}=await axiosCommpn.get(`/alltest/Booking`);
       return data;
       }
       })
+      console.log(Datas);
   const slideToPrev = () => {
     if (swiper) {
       swiper.slidePrev();
@@ -44,7 +43,7 @@ const FeaturesTest = () => {
       <div className="swiper-container">
         <Swiper {...sliderSettings} onSwiper={setSwiper}>
             {
-            appointments?.map(data => (
+            Datas?.map(data => (
               <SwiperSlide key={data?._id}>
               <div >
               <div  className=" border shadow-md border-[#eaeaea] rounded-lg">
@@ -58,7 +57,7 @@ const FeaturesTest = () => {
                       </a>
                       
                       <div className=" flex items-center justify-between">
-                      <span className="text-sm text-gray-500 dark:text-gray-300">On:{data?.date}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-300">On:{data?.appontmentData}</span>
                       <div>
                       <Link to={`/testdetail/${data?._id}`}>
                       <button className=" btn rounded-full py-1 px-8 bg-[#2c8394b3] text-white">Details</button>
