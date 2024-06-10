@@ -1,39 +1,29 @@
-// import { Helmet } from 'react-helmet-async'
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useState } from 'react'
-import { Link } from "react-router-dom";
-import UserInfoModal from "./UserInfoModal";
+import useAuthProvider from "../../../Hooks/useAuthProvider";
 
-const ManageUser = () => {
+const UpcommingAppointments = () => {
 const axiosSecure = useAxiosSecure()
-let [isOpen, setIsEditModalOpen] = useState(false)
-
-function open() {
-  setIsEditModalOpen(true)
-}
-
-function close() {
-  setIsEditModalOpen(false)
-}
-
-  const {data:users}=useQuery({
-    queryKey:"users",
+const {user}=useAuthProvider()
+const email  = user?.email;
+  const {data:appointments}=useQuery({
+    queryKey:["appoinments"],email,
     queryFn:async()=>{
-    const {data}=await axiosSecure.get("/allusers");
+    const {data}=await axiosSecure.get(`/alltest/Booking/${email}`);
     return data;
     }
     })
-  return (
-    <>
-      <section className=" px-4 ">
+    console.log(appointments);
+      return (
+    <div>
+       <section className=" bg-white px-4 ">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 dark:text-white">
-            Team members
+          Appointments
           </h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
-            100 users
+            {appointments?.length} appoinments
           </span>
         </div>
 
@@ -50,11 +40,7 @@ function close() {
                         className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
                         <div className="flex items-center gap-x-3">
-                          <input
-                            type="checkbox"
-                            className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"
-                          />
-                          <span>Name</span>
+                          <span>Image</span>
                         </div>
                       </th>
 
@@ -63,7 +49,7 @@ function close() {
                         className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
                         <button className="flex items-center gap-x-2">
-                          <span>Status</span>
+                          <span>Appintment Name</span>
 
                           <svg
                             className="h-3"
@@ -98,7 +84,7 @@ function close() {
                         className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
                         <button className="flex items-center gap-x-2">
-                          <span>Role</span>
+                          <span>Appointment Date</span>
 
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -120,70 +106,40 @@ function close() {
                         scope="col"
                         className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
-                        Email address
+                        Calcel
                       </th>
 
-                      <th
-                        scope="col"
-                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
-                      >
-                        Information
-                      </th>
-
-                      <th scope="col" className="relative py-3.5 px-4">
-                        <span className="sr-only">Edit</span>
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                    {
-                   users?.map(user=>(
-                    <tr key={user?._id}>
+                   appointments?.map(appointment=>(
+                    <tr key={appointment?._id}>
                       <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                         <div className="inline-flex items-center gap-x-3">
-                          <input
-                            type="checkbox"
-                            className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"
-                          />
-
                           <div className="flex items-center gap-x-2">
                             <img
-                              className="object-cover w-10 h-10 rounded-full"
-                              src={user?.image}
+                              className="object-cover w-24 h-24 rounded-r-xl rounded-l-xl "
+                              src={appointment?.image}
                               alt=""
                             />
-                            <div>
-                              <h2 className="font-medium text-gray-800 dark:text-white ">
-                                {user?.name}
-                              </h2>
-                              
-                            </div>
+        
                           </div>
                         </div>
                       </td>
-                      <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-
-                          <h2 className="text-sm font-normal text-emerald-500">
-                            {user?.status}
+                      <td className="">
+                        <div className="  px-3 py-1 rounded-full  ">
+                          <h2 className="md:text-xl md:max-w-[300px]   font-leto">
+                            {appointment?.title}
                           </h2>
                         </div>
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        {user?.role}
+                        {appointment?.appontmentData}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        {user?.emailAdress}
+                        <button className="btn btn-sm rounded-full bg-[]">cancle</button>
                       </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <button onClick={open} className="btn btn-sm rounded-full bg-[]">See Info</button>
-                        <UserInfoModal setIsEditModalOpen={setIsEditModalOpen} isOpen={isOpen} email={user?.emailAdress} ></UserInfoModal>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <Link to={`/dashboard/userDocuments/${user?.emailAdress}`}><button className="btn btn-sm rounded-full bg-[]">Download Details</button></Link>
-                      </td>
-                      
                     </tr>
                    ))
                    }
@@ -194,8 +150,8 @@ function close() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
-export default ManageUser;
+export default UpcommingAppointments;

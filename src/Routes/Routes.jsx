@@ -12,6 +12,9 @@ import Profile from "../Pages/MyProfile/Profile";
 import TestDetails from "../Pages/AllTest/TestDetails";
 import ManageUser from "../Layout/DashBoard/DashBoardComponents/ManageUser";
 import AddTest from "../Layout/DashBoard/AddTest";
+import UpcommingAppointments from "../Layout/DashBoard/DashBoardComponents/UpcommingAppointments";
+import AllServiceData from "../Layout/DashBoard/AllTestData/AllServiceData";
+import UserDoc from "../Layout/DashBoard/UserDoc";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -45,7 +48,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'alltest',
-        element: <AllTest />
+        element: <PriveteRoutes><AllServiceData></AllServiceData></PriveteRoutes>
       },
       {
         path: 'profile',
@@ -58,6 +61,14 @@ export const router = createBrowserRouter([
       {
         path: 'addtest',
         element: <PriveteRoutes><AddTest></AddTest></PriveteRoutes>
+      },
+      {
+        path: 'upcommingappoinments',
+        element: <PriveteRoutes><UpcommingAppointments/></PriveteRoutes>
+      },
+      {
+        path: 'userDocuments/:email',
+        element: <PriveteRoutes><UserDoc></UserDoc></PriveteRoutes>
       },
     ]
   }

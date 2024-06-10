@@ -67,9 +67,11 @@ const Navbar = () => {
               </button>
               <button type="button" className="flex items-center focus:outline-none" aria-label="toggle profile dropdown">
                 {
-                user?<div className=' flex md:flex-row flex-col gap-4'>
+                user?<div className=' flex md:flex-row items-center flex-col gap-4'>
                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                <div>
                 <Link > <img src={user?.photoURL} alt="avatar" /></Link>
+                </div>
                  
                 </div>
                 <button onClick={()=>logout()}  className=' btn'> Logout</button>

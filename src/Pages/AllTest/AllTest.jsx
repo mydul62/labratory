@@ -6,17 +6,26 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
+// import useAxiosCommon from "../../Hooks/useAxiosCommon";
 const AllTest = () => {
  const axiosSeCure=useAxiosSecure()
+//  const axiosCommon= useAxiosCommon()
  const [startDate, setStartDate] = useState(new Date());
+ const [searchDate, setSearchDate] = useState()
+ const formatteddate = startDate.toISOString().split('T')[0];
   const {data:Datas}=useQuery({
-    queryKey:"districts",
+    queryKey:"datas",
     queryFn:async()=>{
-    const {data}=await axiosSeCure.get("/alltests");
+    const {data}=await axiosSeCure.get(`/alltests`);
     return data;
+    },
+    })  
+    
+    const handleSerch=()=>{
+    setSearchDate(formatteddate);
     }
-    })
-    console.log(Datas);
+    console.log(searchDate);
+
     
   return (
     <div className=" ">
@@ -39,9 +48,11 @@ const AllTest = () => {
     <div className=" max-w-7xl mx-auto ">
     <div className="max-w-7xl  px-6 py-10 mx-auto">
         <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">From the blog</h1>
-          <div className=" pt-12">
-          <DatePicker className=" block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" selected={startDate} onChange={(date) => setStartDate(date)} />
-          <button className="  border">Search</button>
+          <div className=" flex gap-8 items-center pt-12">
+          <DatePicker className=" block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" selected={startDate} onChange={(date) => setStartDate(date)} />
+     
+          <button onClick={handleSerch}  className=" py-3 px-8 rounded-lg  bg-[#6EC1E4]  border">Search</button>
+   
           </div>
         <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-3">
            {
