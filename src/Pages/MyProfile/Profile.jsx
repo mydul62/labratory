@@ -27,7 +27,6 @@ const {data:userinformations}=useQuery({
   return data;
   }
   })
-  console.log(userinformations);
   return (
    <div>
     <div className='flex justify-center items-center h-screen'>

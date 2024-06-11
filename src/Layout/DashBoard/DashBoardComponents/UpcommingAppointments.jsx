@@ -1,12 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuthProvider from "../../../Hooks/useAuthProvider";
+import useAxiosCommon from "../../../Hooks/useAxiosCommon";
 
 const UpcommingAppointments = () => {
 const axiosSecure = useAxiosSecure()
+const axiosCommon = useAxiosCommon()
 const {user}=useAuthProvider()
 const email  = user?.email;
-  const {data:appointments}=useQuery({
+  const {data:appointments,refetch}=useQuery({
     queryKey:["appoinments"],email,
     queryFn:async()=>{
     const {data}=await axiosSecure.get(`/alltest/Booking/${email}`);
@@ -14,6 +16,14 @@ const email  = user?.email;
     }
     })
     console.log(appointments);
+    
+    
+ const handleCancel = async(id)=>{
+   const {data}=await axiosCommon.delete(`/alltest/Booking/Delete/${id}`)  ;
+   console.log(data);
+   refetch();
+   
+ }
       return (
     <div>
        <section className=" bg-white px-4 ">
@@ -138,7 +148,7 @@ const email  = user?.email;
                         {appointment?.appontmentData}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <button className="btn btn-sm rounded-full bg-[]">cancle</button>
+                        <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full bg-[]">cancle</button>
                       </td>
                     </tr>
                    ))

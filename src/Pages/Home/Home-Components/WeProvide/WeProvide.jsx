@@ -27,7 +27,7 @@ const WeProvide = () => {
       </div>
       <div className=" flex justify-center items-start gap-4">
       <span>
-      <PiPencilLineLight   className="text-[#0767a7]" color="red" size={40} />
+      <PiPencilLineLight    className="text-[#0767a7]" size={40} />
       </span>
       <div >
       <h2 className=" text-xl font-bold ">Provision & Servicing
