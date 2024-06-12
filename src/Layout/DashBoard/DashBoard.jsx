@@ -12,20 +12,21 @@ const handleDashboard =()=>{
 }
   return (
   <div>
-  <div className=" flex bg-[#eaeaea]   justify-center  py-6 border-b border-dashed mb-3">
+  <div className=" flex  shadow-sm  justify-between py-4 border-b border ">
+  <div><h2 className=" md:ml-16 ml-3 font-Lora text-2xl italic">LabRatory</h2></div>
   {
-  dashboard?<FaBars className="lg:hidden" onClick={ handleDashboard} ></FaBars>: <RxCross1 className="lg:hidden" onClick={ handleDashboard}  />
+  dashboard?<FaBars className="lg:hidden mr-3" onClick={ handleDashboard} ></FaBars>: <RxCross1 className="lg:hidden" onClick={ handleDashboard}  />
   }
   
  
 
   </div>
-  <aside className="flex bg-[#eaeaea] rounded-md">
+  <aside className="flex  rounded-md">
   
     <div className={` z-50 flex flex-col lg:translate-x-0 ${dashboard?'translate-x-[-100%]':'translate-x-0' } duration-500 absolute lg:static w-80 xs:w-[70%] min-h-[calc(100vh-40px)]   px-4  overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700`}>
     <div className="flex">
      <div className="md:flex flex-col items-center w-16 min-h-[calc(100vh-40px)] bg-white dark:bg-gray-900 dark:border-gray-700 overflow-y-auto ">
-          <nav className="flex flex-col items-center flex-1 space-y-8 ">
+          <nav className="flex flex-col items-center flex-1 space-y-12 mt-4 ">
               <NavLink to={'/'}  href="#" className="p-1.5 inline-block text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -60,8 +61,8 @@ const handleDashboard =()=>{
       </div>
       
       <div className="max-h-screen px-5  bg-white border-l border-r sm:w-64 w-60 dark:bg-gray-900 dark:border-gray-700">
-          <div className="relative">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+          <div className="relative mt-4">
+              <span className="absolute inset-y-0 mt4 left-0 flex items-center pl-3">
                   <svg className="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
                       <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                   </svg>

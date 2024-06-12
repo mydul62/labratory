@@ -148,7 +148,7 @@ const email  = user?.email;
                         {appointment?.appontmentData}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full bg-[]">cancle</button>
+                        <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full bg-[]">cancel</button>
                       </td>
                     </tr>
                    ))

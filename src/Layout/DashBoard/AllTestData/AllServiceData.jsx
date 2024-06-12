@@ -1,18 +1,26 @@
 import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { FaPencil } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const AllServiceData = () => {
   const axiosSeCure=useAxiosSecure()
-    const {data:datas}=useQuery({
+    const {data:datas,refetch}=useQuery({
       queryKey:"datas",
       queryFn:async()=>{
       const {data}=await axiosSeCure.get(`/alltests`);
       return data;
       },
       })  
+      // ________________________________delete service
       
-      console.log(datas);
+      const handleDelete = async (id) => {
+      const {data}=await axiosSeCure.delete(`/alltest/delete/${id}`);
+      console.log(data);
+      refetch();
+      }
   return (
     <div>
             <section className=" px-4 ">
@@ -83,7 +91,7 @@ const AllServiceData = () => {
                         className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
                         <button className="flex items-center gap-x-2">
-                          <span>data Date</span>
+                          <span>ReserVations</span>
 
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +113,13 @@ const AllServiceData = () => {
                         scope="col"
                         className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                       >
-                        Calcel
+                       Update
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      >
+                        Delete
                       </th>
 
                     </tr>
@@ -137,7 +151,12 @@ const AllServiceData = () => {
                         {data?.date}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        <button className="btn btn-sm rounded-full bg-[]">cancle</button>
+                       <Link to={`/dashboard/Updates/${data?._id}`} > <button className="btn btn-sm rounded-full bg-[]"><FaPencil  size={20} color="red" />
+                       </button></Link>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                        <button onClick={()=>handleDelete(data?._id)} className="btn btn-sm rounded-full bg-[]"><RiDeleteBin5Line size={20} color="red" />
+                        </button>
                       </td>
                     </tr>
                    ))

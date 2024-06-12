@@ -15,6 +15,8 @@ import AddTest from "../Layout/DashBoard/AddTest";
 import UpcommingAppointments from "../Layout/DashBoard/DashBoardComponents/UpcommingAppointments";
 import AllServiceData from "../Layout/DashBoard/AllTestData/AllServiceData";
 import UserDoc from "../Layout/DashBoard/UserDoc";
+import AdminDeshBoard from "../Layout/DashBoard/AmdinDashBoard/AdminDeshBoard";
+import UpdateService from "../Layout/DashBoard/AllTestData/UpdateService";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -47,6 +49,10 @@ export const router = createBrowserRouter([
     element: <PriveteRoutes><DashBoard /></PriveteRoutes>,
     children: [
       {
+        path: '/dashboard',
+        element: <PriveteRoutes><AdminDeshBoard></AdminDeshBoard></PriveteRoutes>
+      },
+      {
         path: 'alltest',
         element: <PriveteRoutes><AllServiceData></AllServiceData></PriveteRoutes>
       },
@@ -69,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: 'userDocuments/:email',
         element: <PriveteRoutes><UserDoc></UserDoc></PriveteRoutes>
+      },
+      {
+        path: 'Updates/:id',
+        element: <PriveteRoutes><UpdateService></UpdateService></PriveteRoutes>
       },
     ]
   }

@@ -3,10 +3,12 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 import UserInfoModal from "./UserInfoModal";
+import UserStatusModal from "./UserStatusModal";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
   let [isOpen, setIsEditModalOpen] = useState(false);
+  let [isStatusOpen, setStatusOpen] = useState(false);
   const [modalEmail, setModalInfo] = useState();
 
   function open(email) {
@@ -16,6 +18,14 @@ const ManageUser = () => {
 
   function close() {
     setIsEditModalOpen(false);
+  }
+  function StatusOpen(email) {
+    setStatusOpen(true);
+    setModalInfo(email);
+  }
+
+  function StatusClose() {
+    setStatusOpen(false);
   }
 
   const { data: users } = useQuery({
@@ -138,9 +148,10 @@ const ManageUser = () => {
                         <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                           <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                            <h2 className="text-sm font-normal text-emerald-500">
+                            <button onClick={()=>StatusOpen(user?.emailAdress)} className="text-sm font-normal text-emerald-500">
                               {user?.status}
-                            </h2>
+                            </button>
+                            <UserStatusModal setStatusOpen={setStatusOpen} isStatusOpen={isStatusOpen} email={modalEmail} ></UserStatusModal>
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">

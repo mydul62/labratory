@@ -69,7 +69,7 @@ const UserDoc = () => {
 
   return (
     <div>
-      <div id="pdf_section" className="max-w-7xl mx-auto py-4 flex bg-white  justify-center">
+      <div id="pdf_section" className="max-w-7xl mx-auto py-4 flex justify-center">
         <button onClick={downloadPDF} className="btn-sm btn bg-green-400">Print Info</button>
       </div>
       <div className="max-w-7xl mx-auto border p-8  rounded-md" ref={pdfRef}>
