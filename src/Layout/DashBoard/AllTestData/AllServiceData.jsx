@@ -148,7 +148,7 @@ const AllServiceData = () => {
                         </div>
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        {data?.date}
+                      <Link to={`/dashboard/reservation/${data?._id}`}> <button className=" btn btn-sm bg-[#597e5c] text-white">View Reservations</button></Link>
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                        <Link to={`/dashboard/Updates/${data?._id}`} > <button className="btn btn-sm rounded-full bg-[]"><FaPencil  size={20} color="red" />

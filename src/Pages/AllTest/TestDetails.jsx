@@ -43,12 +43,12 @@ const {data:serviceData,refetch}=useQuery({
       category: serviceData?.category,
       userName: user?.displayName,
       userEmail: user?.email,
+      bookingId : id,
       }
       
       const postService = async()=>{
         const {data} = await axiosSecure.post('/alltest/Booking',serviceDetails);
         if(data.insertedId){
-           console.log(data.insertedId);
            alert("Inserted")
            updateSlot()
            refetch(data.insertedId);

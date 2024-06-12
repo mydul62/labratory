@@ -3,6 +3,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import Swal from "sweetalert2";
 
 const AddTest = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -44,10 +45,17 @@ const AddTest = () => {
       slot,
       category
     };
-    console.log(service);
      const postService = async()=>{
       const {data}= await axiosCommon.post("/alltest", service)
-      console.log(data);
+      if(data.insertedId){
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your Data has been inserted",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
      }
      postService();
      

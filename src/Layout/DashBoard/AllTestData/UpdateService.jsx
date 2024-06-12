@@ -17,10 +17,17 @@ const UpdateService = () => {
  const navigate = useNavigate();
  //  --------------------------------------find data from mongoDb by id useQuery
 const {data:formDatas,refetch}=useQuery({
-  queryKey:["tests"],id,
+  queryKey:["tests",id],
   queryFn:async()=>{
   const {data}=await axiosSecure.get(`/Alltests/tests/test/${id}`);
   return data;
+  }
+  })
+ const {data:categoris}=useQuery({
+ queryKey:["categories"],
+   queryFn:async()=>{
+    const { data } = await axios.get('/categories.json');
+ return data;
   }
   })
 
@@ -61,7 +68,6 @@ const {data:formDatas,refetch}=useQuery({
       slot,
       category
     };
-  
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -84,13 +90,12 @@ const {data:formDatas,refetch}=useQuery({
       form.reset();
       form.image.value = null;
       Swal.fire({
-        title: "Deleted!",
+        title: "Updated!",
         text: "Your file has been Updated.",
         icon: "success"
       });
     }
   };
-  console.log(formDatas);
   return (
     <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
     <div className=" my-3">
@@ -175,12 +180,12 @@ const {data:formDatas,refetch}=useQuery({
       className='w-full px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500 rounded-md'
       name='category'
     >
-      <option value="Cardiology" selected={formDatas.category === "Cardiology"}>Cardiology</option>
-      <option value="Computer diagnostic" selected={formDatas.category === "Computer diagnostic"}>Computer diagnostic</option>
-      <option value="Massage" selected={formDatas.category === "Massage"}>Massage</option>
-      <option value="Neurosurgery" selected={formDatas.category === "Neurosurgery"}>Neurosurgery</option>
-      <option value="Uncategorized" selected={formDatas.category === "Uncategorized"}>Uncategorized</option>
-      <option value="Urology" selected={formDatas.category === "Urology"}>Urology</option>
+      {
+      categoris?.map((category,i)=>(
+        <option key={i} value={category?.category} selected={formDatas?.category === `${category?.category}`}>{category?.category}</option>
+      ))
+      
+      }
     </select>
   </div>
 </div>

@@ -17,6 +17,7 @@ import AllServiceData from "../Layout/DashBoard/AllTestData/AllServiceData";
 import UserDoc from "../Layout/DashBoard/UserDoc";
 import AdminDeshBoard from "../Layout/DashBoard/AmdinDashBoard/AdminDeshBoard";
 import UpdateService from "../Layout/DashBoard/AllTestData/UpdateService";
+import ReserVatons from "../Layout/DashBoard/AllTestData/Reservations/ReserVatons";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: 'Updates/:id',
         element: <PriveteRoutes><UpdateService></UpdateService></PriveteRoutes>
+      },
+      {
+        path: 'reservation/:id',
+        element: <PriveteRoutes><ReserVatons></ReserVatons></PriveteRoutes>
       },
     ]
   }

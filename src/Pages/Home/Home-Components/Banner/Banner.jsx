@@ -25,9 +25,9 @@ const Banner = () => {
   <img className=" h-full" src="//mida.peerduck.com/wp-content/uploads/2023/03/k4lmtg-1024x1000.png" alt="" />
   </div>
  </div>
- <div className=" h-28 w-28 text-white   animate-spi rounded-full bg-[#004552] absolute top-28 right-[450px] flex justify-center items-center">
+ {/* <div className=" h-28 w-28 text-white   animate-spi rounded-full bg-[#004552] absolute top-28 right-[450px] flex justify-center items-center">
  mahim
- </div>
+ </div> */}
 </div>
   );
 };

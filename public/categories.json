@@ -1,9 +1,17 @@
 [
-{"name":"Cardiology"},
-{"name":"Computer diagnostic"},
-{"name":"Massage"} ,
-{"name":"MRI scanning"},
-{"name":"Neurosurgery"} ,
-{"name":"Surgery"},
-{"name":"Uncategorized"},
-{"name":"Urology"} ]
+    {
+        "category": "Blood Test"
+    },
+    {
+        "category": "Urine Test"
+    },
+    {
+        "category": "Imaging"
+    },
+    {
+        "category": "Women's Health"
+    },
+    {
+        "category": "Cardiology"
+    }
+]
