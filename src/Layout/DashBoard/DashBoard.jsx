@@ -12,20 +12,17 @@ const handleDashboard =()=>{
 }
   return (
   <div>
-  <div className=" flex  shadow-sm  justify-between py-4 border-b border ">
+     <div className=" flex  shadow-sm  justify-between py-4 border-b border ">
   <div><h2 className=" md:ml-16 ml-3 font-Lora text-2xl italic">LabRatory</h2></div>
   {
   dashboard?<FaBars className="lg:hidden mr-3" onClick={ handleDashboard} ></FaBars>: <RxCross1 className="lg:hidden" onClick={ handleDashboard}  />
   }
-  
- 
-
-  </div>
+  </div> 
   <aside className="flex  rounded-md">
   
-    <div className={` z-50 flex flex-col lg:translate-x-0 ${dashboard?'translate-x-[-100%]':'translate-x-0' } duration-500 absolute lg:static w-80 xs:w-[70%] min-h-[calc(100vh-40px)]   px-4  overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700`}>
-    <div className="flex">
-     <div className="md:flex flex-col items-center w-16 min-h-[calc(100vh-40px)] bg-white dark:bg-gray-900 dark:border-gray-700 overflow-y-auto ">
+    <div className={` z-50 flex flex-col lg:translate-x-0 ${dashboard? 'translate-x-[-100%] ':'translate-x-0' }   duration-500 absolute lg:static w-80 xs:w-[70%]   px-4  overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700`}>
+    <div className="flex  ">
+     <div className="md:flex min-h-[calc(100vh-100px)] flex-col items-center w-16   bg-white dark:bg-gray-900 dark:border-gray-700 ">
           <nav className="flex flex-col items-center flex-1 space-y-12 mt-4 ">
               <NavLink to={'/'}  href="#" className="p-1.5 inline-block text-gray-500 focus:outline-nones transition-colors duration-200 rounded-lg dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -47,7 +44,7 @@ const handleDashboard =()=>{
               </a>
           </nav>
   
-          <div className="flex flex-col items-center mt-4 overflow-y-auto space-y-4">
+          <div className="flex flex-col items-center mt-4  space-y-4">
               <a href="#">
                   <img className="object-cover w-8 h-8 rounded-lg" src={user?.photoURL} alt="avatar" />
               </a>

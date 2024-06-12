@@ -4,24 +4,30 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import UserInfoModal from "./UserInfoModal";
 import UserStatusModal from "./UserStatusModal";
+import UserRollModal from "./UserRollModal";
 
 const ManageUser = () => {
   const axiosSecure = useAxiosSecure();
   let [isOpen, setIsEditModalOpen] = useState(false);
   const [modalEmail, setModalInfo] = useState();
+  const [isStatusOpen, setStatusOpen] = useState(false); 
+  const [isRoleStatusOpen, setRoleStatusOpen] = useState(false); 
 
-  function open(email) {
-    setIsEditModalOpen(true);
-    setModalInfo(email);
+  const openModal = (email) =>{ 
+  setStatusOpen(true);
+  setModalInfo(email);
   }
-
-  function close() {
-    setIsEditModalOpen(false);
+  const openRoleModal = (email) =>{ 
+  setRoleStatusOpen(true);
+  setModalInfo(email);
   }
+  const closeModal = () => setStatusOpen(false);
+  const closeRoleModal = () => setRoleStatusOpen(false);
+  
+ 
 
 
-
-  const { data: users } = useQuery({
+  const { data: users,refetch } = useQuery({
     queryKey: "users",
     queryFn: async () => {
       const { data } = await axiosSecure.get("/allusers");
@@ -58,8 +64,8 @@ const ManageUser = () => {
                     </th>
                     <th scope="col" className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   
-                    <button className="flex items-center gap-x-2">
-                      
+                    <button  className="flex items-center gap-x-2">
+                     
                       <span>Status</span>
                       <svg
                         className="h-3"
@@ -142,54 +148,25 @@ const ManageUser = () => {
                       </td>
                       <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
     <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-  
-        {/* Open the modal */}
-        <button className="text-sm font-normal text-emerald-500" onClick={() => document.getElementById('my_modal_5').showModal()}>Open Modal</button>
-    </div>
-
-    {/* Modal */}
-    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box bg-white p-6 rounded-lg">
-            <h3 className="font-bold text-lg">Hello!</h3>
-            <p className="py-4">Press ESC key or click the button below to close</p>
-            <form>
-                <div className='flex flex-col gap-4'>
-                    <label htmlFor='status' className='text-gray-700'>Status</label>
-                    <select
-                        id='status'
-                        name='status'
-                        className='block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
-                    >
-                        <option value='active'>Active</option>
-                        <option value='blocked'>Blocked</option>
-                    </select>
+    <button
+        onClick={()=>openModal(user?.emailAdress)}
+        className="px-4 py-2 "
+      >{user?.status}</button>
                 </div>
-                <hr className='mt-8' />
-                <div className='flex justify-end gap-4'>
-                    <button
-                        type='button'
-                        className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                        onClick={() => document.getElementById('my_modal_5').close()}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type='submit'
-                        className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                    >
-                        Update
-                    </button>
+                <UserStatusModal refetch= {refetch} isOpen={isStatusOpen} email = {modalEmail} closeModal={closeModal} />
+                       </td>
+                      <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+    <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+    <button
+        onClick={()=>openRoleModal(user?.emailAdress)}
+        className="px-4 py-2 "
+      >{user?.role}</button>
                 </div>
-            </form>
-        </div>
-    </dialog>
-</td>
+                <UserRollModal refetch= {refetch} isOpen={isRoleStatusOpen} email = {modalEmail} closeModal={closeRoleModal} />
+                       </td>
 
 
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                        {user?.role}
-                      </td>
+                     
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                         {user?.emailAdress}
                       </td>
