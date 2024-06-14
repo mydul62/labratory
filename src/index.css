@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
 
-color: black;
+
+.active{
+  border-bottom: 2px solid red;/* Optional: change text color when active */
 }

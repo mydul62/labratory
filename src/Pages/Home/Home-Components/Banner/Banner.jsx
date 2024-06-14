@@ -1,34 +1,48 @@
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const Banner = () => {
+  const axiosSecure = useAxiosSecure();
+
+ const isActive = true;
+
+//  const banner = {
+//   title: "Comprehensive Diagnostic Services",
+//   image: "https://doctoraltheme.com/wp-content/themes/doctoral/assets/images/gallery/1.jpg",
+//   text: "Get accurate and timely diagnostic services with our state-of-the-art facilities.",
+//   couponCode: "DIAG10",
+//   discountRate: 10,
+// };
+  
+  const { data: banner ={}, refetch } = useQuery({
+    queryKey: ['banners', isActive],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/all_banners/banners/${isActive}`);
+      return data;
+    }
+  });
   return (
-    <div
-    style={{
-      backgroundImage: `linear-gradient(to left top,rgba(110, 193, 228, 0.6), rgba(110, 193, 228, 0.7), rgba(110, 193, 228, 0.1)), url('https://mida.peerduck.com/wp-content/uploads/2023/03/k43jtng.png')`,
-      backgroundRepeat: "no-repeat",
+    <div    style={{
+      backgroundImage: `linear-gradient(to left top, rgba(110, 193, 228, 0.2), rgba(110, 193, 228, 0.4), rgba(110, 193, 228, 0.1)), url('${banner?.image}')`,
+      backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-    }}
-  className="flex md:flex-row flex-col md:pt-16 relative"
->
- <div className=" max-w-7xl w-[90%] mx-auto  flex md:flex-row flex-col  items-center justify-between">
- <div className=" flex items-center min-h-[700px]  ">
- <div className="space-y-6 md:w-[70%] ">
- <h2 className="md:text-8xl text-7xl   text-[#004552] font-Lora ">Your health is our top priority.</h2>
-  <h2 className=" text-2xl text-[#595959]">Get the answers you need for a healthier you at our medical diagnostic center.</h2>
-  <div>
-  <Link to={'/allTest'}> <button className=" py-3 px-16 rounded-full bg-[#004552] text-white">All Tests</button></Link>
-  </div>
- </div>
-  </div>
-  <div className=" w-full h-full ">
-  <img className=" h-full" src="//mida.peerduck.com/wp-content/uploads/2023/03/k4lmtg-1024x1000.png" alt="" />
-  </div>
- </div>
- {/* <div className=" h-28 w-28 text-white   animate-spi rounded-full bg-[#004552] absolute top-28 right-[450px] flex justify-center items-center">
- mahim
- </div> */}
-</div>
+    }} className=" p-8  min-h-[700px] flex justify-center items-center flex-col text-center mx-4 md:mx-auto ">
+      <h1 className="text-5xl font-bold font-Lora text-gray-800 mb-4">{banner.title}</h1>
+      <p className="text-lg text-gray-700 mb-6">{banner.text}</p>
+      {banner.couponCode && (
+        <div className="mb-6">
+          <p className="text-lg font-semibold text-gray-800">Coupon Code: <span className="font-bold text-blue-600">{banner.couponCode}</span></p>
+          <p className="text-lg font-semibold text-gray-800">Discount: <span className="font-bold text-blue-600">{banner.discountRate}%</span></p>
+        </div>
+      )}
+      <Link to={'/alltest'}><button
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+      >
+        View All Tests
+      </button></Link>
+    </div>
   );
 };
 

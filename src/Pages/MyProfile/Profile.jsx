@@ -5,88 +5,100 @@ import UpdateProfileModal from "./UpdateProfileModal";
 import { useState } from "react";
 
 const Profile = () => {
-const {user}=useAuthProvider()
-const email = user.email;
-const axiosSecure = useAxiosSecure()
-let [isOpen, setIsEditModalOpen] = useState(false)
+  const { user, passwordReset } = useAuthProvider();
+  const email = user.email;
+  const axiosSecure = useAxiosSecure();
+  const [isOpen, setIsEditModalOpen] = useState(false);
 
-function open() {
-  setIsEditModalOpen(true)
-}
+  const openModal = () => {
+    setIsEditModalOpen(true);
+  };
 
-function close() {
-  setIsEditModalOpen(false)
-}
+  const closeModal = () => {
+    setIsEditModalOpen(false);
+  };
 
+  const handleResetPassword = () => {
+    passwordReset(email)
+      .then(() => {
+        alert("Password reset link has been sent to your email");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const { data: userInformations ,refetch} = useQuery({
+    queryKey: "userInformations",
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/allusers/email/${email}`);
+      return data;
+    },
+  });
 
-const {data:userinformations}=useQuery({
-  queryKey:"userinformations",
-  queryFn:async()=>{
-  const {data}=await axiosSecure.get(`/allusers/email/${email}`);
-  return data;
-  }
-  })
   return (
-   <div>
-    <div className='flex justify-center items-center h-screen'>
-      {/* <Helmet>
-        <title>Profile</title>
-      </Helmet> */}
-      <div className='bg-white shadow-lg rounded-2xl md:w-3/5'>
-        <img
-          alt='profile'
-          src='https://wallpapercave.com/wp/wp10784415.jpg'
-          className='w-full mb-4 rounded-t-lg h-36'
-        />
-        <div className='flex flex-col items-center justify-center p-4 -mt-16'>
-          <a href='#' className='relative block'>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg max-w-[800px] w-full p-6">
+        <div className="flex items-center justify-center">
+          <img
+            src="https://cdn.pixabay.com/photo/2023/04/17/12/10/pattern-7932239_960_720.jpg"
+            alt="profile background"
+            className="rounded-t-lg w-full mb-4 h-36 object-cover"
+          />
+        </div>
+        <div className="flex flex-col items-center justify-center -mt-16">
+          <div className="relative block">
             <img
-              alt='profile'
-              src={userinformations?.image
-              }
-              className='mx-auto object-cover rounded-full h-24 w-24  border-2 border-white '
+              src={userInformations?.image || "https://via.placeholder.com/150"}
+              alt="profile"
+              className="mx-auto object-cover rounded-full h-24 w-24 border-2 border-white"
             />
-          </a>
-
-          <p className='p-2 px-4 text-xs text-white bg-pink-500 rounded-full'>
-            {userinformations?.role}
+          </div>
+          <p className="p-2 px-4 text-xs text-white bg-pink-500 rounded-full">
+            {userInformations?.role}
           </p>
-          <p className='mt-2 text-xl font-medium text-gray-800 '>
-            User Id: {userinformations?._id}
+          <p className="mt-2 text-xl font-medium text-gray-800">
+            User ID: {userInformations?._id}
           </p>
-          <div className='w-full p-2 mt-4 rounded-lg'>
-            <div className='flex gap-3 flex-wrap items-center justify-between text-sm text-gray-600 '>
-              <p className='flex flex-col'>
-                Name
-                <span className='font-bold text-black '>
-                  {userinformations?.name}
-                </span>
-              </p>
-              <p className='flex flex-col'>
-                Email
-                <span className='font-bold text-black '>{userinformations?.emailAdress}</span>
-              </p>
-
-              <div className=" flex  flex-col gap-1">
-               <div >
-               <button onClick={open} className='bg-[#F43F5E] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1'>
+          <div className="w-full p-2 mt-4 rounded-lg">
+            <div className="flex gap-3 flex-wrap items-center justify-between text-sm text-gray-600">
+             <div className=" flex flex-col ">
+             <div className="flex flex-col">
+                <p>
+                  <span className="font-bold">Name:</span>{" "}
+                  {userInformations?.name}
+                </p>
+              </div>
+              <div className="flex flex-col">
+                <p>
+                  <span className="font-bold">Email:</span>{" "}
+                  {userInformations?.emailAdress}
+                </p>
+              </div>
+             </div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={openModal}
+                  className="bg-[#F43F5E] px-8 py-2 rounded-lg text-white cursor-pointer hover:bg-[#af4053]"
+                >
                   Update Profile
                 </button>
-                <UpdateProfileModal setIsEditModalOpen={setIsEditModalOpen} isOpen={isOpen} ></UpdateProfileModal>
-               </div>
-               <div>
-               <button className='bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]'>
+                <UpdateProfileModal
+                  setIsEditModalOpen={setIsEditModalOpen}
+                  isOpen={isOpen} refetch={refetch} closeModal={closeModal}
+                />
+                <button
+                  onClick={handleResetPassword}
+                  className="bg-[#F43F5E] px-8 py-2 rounded-lg text-white cursor-pointer hover:bg-[#af4053]"
+                >
                   Change Password
                 </button>
-               </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
   );
 };
 

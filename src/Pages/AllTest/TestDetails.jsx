@@ -4,15 +4,36 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuthProvider from "../../Hooks/useAuthProvider";
+import { useState } from "react";
+import TestModal from "./TestModal/TestModal";
 
 const TestDetails = () => {
  const axiosSecure = useAxiosSecure()
  const {user}=useAuthProvider()
+ let [isOpen, setIsEditModalOpen] = useState(false);
+ const [modalInfo,setModalInfo]=useState()
+ 
+ function open(id) {
+  setIsEditModalOpen(true);
+  setModalInfo(id);
+}
+const closeModal = () => setIsEditModalOpen(false);
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  let currentDate = new Date();
-    let formattedDate = currentDate.toISOString().split('T')[0];
+ let formattedDate = currentDate.toISOString().split('T')[0];
 const {id}=useParams()
 const {data:serviceData,refetch}=useQuery({
-  queryKey:["tests"],id,
+  queryKey:["tests",id],
   queryFn:async()=>{
   const {data}=await axiosSecure.get(`/Alltests/tests/test/${id}`);
   return data;
@@ -30,38 +51,38 @@ const {data:serviceData,refetch}=useQuery({
     }
 };
   
-  const handleBookService = ()=>{
-    
-      const serviceDetails = {
-      title: serviceData?.title,
-      description: serviceData?.description,
-      price: serviceData?.price,
-      image: serviceData?.image,
-      BookedDate: formattedDate,
-      status:'panding',
-      appontmentData:serviceData?.date,
-      category: serviceData?.category,
-      userName: user?.displayName,
-      userEmail: user?.email,
-      bookingId : id,
-      }
+  const handleBookService = (id)=>{
+    open(id)
+      // const serviceDetails = {
+      // title: serviceData?.title,
+      // description: serviceData?.description,
+      // price: serviceData?.price,
+      // image: serviceData?.image,
+      // BookedDate: formattedDate,
+      // status:'panding',
+      // appontmentData:serviceData?.date,
+      // category: serviceData?.category,
+      // userName: user?.displayName,
+      // userEmail: user?.email,
+      // bookingId : id,
+      // }
       
-      const postService = async()=>{
-        const {data} = await axiosSecure.post('/alltest/Booking',serviceDetails);
-        if(data.insertedId){
-           alert("Inserted")
-           updateSlot()
-           refetch(data.insertedId);
-           
-        }
-      }
-      postService();
-     
       
+      
+      
+      
+      // const postService = async()=>{
+      //   const {data} = await axiosSecure.post('/alltest/Booking',serviceDetails);
+      //   if(data.insertedId){
+      //     refetch();
+      //      alert("Inserted")
+      //      updateSlot()   
+      //   }
+      // }
+      // postService();
+
   }
-  
-  
-  
+ 
   return (
    <div >
     <div
@@ -70,16 +91,17 @@ const {data:serviceData,refetch}=useQuery({
       backgroundRepeat: "no-repeat",
       backgroundSize: 'cover',
       backgroundPosition: 'center bottom',
-    }} className="min-h-[250px] bg-fixed">
-      here is test details
+    }} className="min-h-[400px] flex justify-center items-center bg-fixed">
+      <h1  className=" text-5xl text-white uppercase">tis is the item</h1>
     </div>
     <div className=" max-w-7xl w-[90%] mx-auto ">
-     <div className="grid grid-cols-6 gap-12 py-16">
-     <div  className=" col-span-4">
-     <div className=" w-full h-[510px] rounded-md">
+    <div className=" w-full h-[510px] rounded-md mt-12">
      <img className=" w-full h-[510px] rounded-md" src={serviceData?.image} alt="" />
      </div>
-     <div className= " flex items-center justify-between py-4">
+     <div className="grid grid-cols-6 gap-12 py-8 ">
+     <div  className=" col-span-4">
+  
+     <div className= " flex items-center justify-between ">
      <div className=" flex items-center gap-4">
      <button  className=" btn rounded-full py-1 px-8 bg-[#009fe3c8] text-white">{serviceData?.category}</button>
      <span className=" flex items-center gap-1"><FaUser></FaUser>by admin
@@ -88,27 +110,28 @@ const {data:serviceData,refetch}=useQuery({
 {serviceData?.date}</span>
      </div>
      <div className=" font-bold">
-     Slots:{serviceData?.slot}
+     Availabale Slots:{serviceData?.slot}
      </div>
      </div>
      <div>
      <p>{serviceData?.description}</p>
      </div>
      </div>
-     <div className=" col-span-2 bg-[#d3e0e7d1] p-4 rounded-md ">
+     <div className=" col-span-2 bg-[#edededd1] p-4 rounded-md ">
      <div className=" rounded-md space-y-4">
      <h1 className=" text-2xl font-Source">{serviceData?.title}</h1>
-     <h2 className="text-xl text-[#009fe3]">Slots: {serviceData?.slot}</h2>
-     <div className=" h-[400px] w-full border border-red-500 p-3">
+     <h2 className="text-xl ">Slots: {serviceData?.slot}</h2>
+     <div className=" w-full border border-red-500 p-3">
      Calender
      </div>
      <div>
-     <button onClick={handleBookService} className=" btn">Book Now</button>
+     <button onClick={()=>handleBookService(serviceData?._id)} className=" btn">Book Now</button>
      </div>
      </div>
      </div>
      </div>
     </div>
+    <TestModal isOpen={isOpen} closeModal={closeModal} id={modalInfo} serviceData={serviceData}  ></TestModal>
    </div>
   );
 };

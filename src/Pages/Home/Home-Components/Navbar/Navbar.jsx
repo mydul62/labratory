@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useAuthProvider from '../../../../Hooks/useAuthProvider';
-
+import "./navbar.css"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {user,logout}=useAuthProvider()
@@ -38,16 +38,19 @@ const Navbar = () => {
               isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full'
             } absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 lg:mt-0 lg:p-0 lg:top-0 lg:relative lg:bg-transparent lg:w-auto lg:opacity-100 lg:translate-x-0 lg:flex lg:items-center`}
           >
-            <div className="flex flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
-              <Link to={'/'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+            <div className="flex menu flex-col -mx-6 lg:flex-row lg:items-center lg:mx-8">
+              <NavLink activeClassName="nav-activ" to={'/'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 Home
-              </Link>
-              <Link to={'/alltest'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+              </NavLink>
+              <NavLink activeClassName="nav-activ" to={'/alltest'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                 All Test
-              </Link>
-              <Link to={'dashboard'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+              </NavLink>
+              <NavLink activeClassName="nav-activ" to={'/contactus'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+               Contact us
+              </NavLink>
+              <NavLink  activeClassName="nav-activ" to={'dashboard'}  className="px-3 py-2 mx-3 mt-2 text-[#004552] text-xl text-xltransition-colors duration-300 transform rounded-md lg:mt-0 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
                Dashboard
-              </Link>
+              </NavLink>
               
             </div>
             <div className="flex items-center mt-4 lg:mt-0">
@@ -70,13 +73,13 @@ const Navbar = () => {
                 user?<div className=' flex md:flex-row items-center flex-col gap-4'>
                 <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
                 <div>
-                <Link > <img src={user?.photoURL} alt="avatar" /></Link>
+                <NavLink > <img src={user?.photoURL} alt="avatar" /></NavLink>
                 </div>
                  
                 </div>
                 <button onClick={()=>logout()}  className=' btn'> Logout</button>
                 </div>:
-                <Link to={'/registration'} > <button>login</button></Link>
+                <NavLink to={'/login'} > <button>login</button></NavLink>
               
                 }
               </button>

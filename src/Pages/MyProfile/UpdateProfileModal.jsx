@@ -13,8 +13,9 @@ import axios from 'axios';
 import useAxiosCommon from '../../Hooks/useAxiosCommon';
 import useAuthProvider from '../../Hooks/useAuthProvider';
 import { FaHome } from "react-icons/fa";
+import Swal from 'sweetalert2';
 
-const UpdateProfileModal = ({ setIsEditModalOpen, isOpen }) => {
+const UpdateProfileModal = ({ setIsEditModalOpen, isOpen,refetch,closeModal }) => {
 const axiosCommon = useAxiosCommon()
 const {user}= useAuthProvider()
 const email = user.email;
@@ -57,9 +58,19 @@ const email = user.email;
       }
     }
     const updateInfo = { userName, bloodGrupe, district, upazilla, imageUrl };
-
         const {data} = await axiosCommon.patch(`/allusers/Updates/update/${email}`,updateInfo);
-        console.log(data)
+        if(data.acknowledged){
+          refetch()
+          closeModal()
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your is updated",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          
+        }
       };
 
   return (

@@ -18,6 +18,9 @@ import UserDoc from "../Layout/DashBoard/UserDoc";
 import AdminDeshBoard from "../Layout/DashBoard/AmdinDashBoard/AdminDeshBoard";
 import UpdateService from "../Layout/DashBoard/AllTestData/UpdateService";
 import ReserVatons from "../Layout/DashBoard/AllTestData/Reservations/ReserVatons";
+import ContactPage from "../Pages/ContactPage/ContactPage";
+import Banner from "../Pages/Home/Home-Components/Banner/Banner";
+import Banners from "../Layout/DashBoard/AddBanners/Banners";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -36,13 +39,18 @@ export const router = createBrowserRouter([
         element: <TestDetails />
       },
       {
-        path: "registration",
+        path: "/contactus",
+        element: <ContactPage></ContactPage>
+      },
+      {
+        path: "/registration",
         element: <Registration />
       },
       {
-        path: "login",
+        path: "/login",
         element: <Login />
       }
+      
     ]
   },
   {
@@ -50,7 +58,7 @@ export const router = createBrowserRouter([
     element: <PriveteRoutes><DashBoard /></PriveteRoutes>,
     children: [
       {
-        path: '/dashboard',
+        index:true,
         element: <PriveteRoutes><AdminDeshBoard></AdminDeshBoard></PriveteRoutes>
       },
       {
@@ -84,6 +92,10 @@ export const router = createBrowserRouter([
       {
         path: 'reservation/:id',
         element: <PriveteRoutes><ReserVatons></ReserVatons></PriveteRoutes>
+      },
+      {
+        path: 'banners',
+        element: <PriveteRoutes><Banners></Banners></PriveteRoutes>
       },
     ]
   }

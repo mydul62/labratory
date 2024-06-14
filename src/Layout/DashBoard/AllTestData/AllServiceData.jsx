@@ -10,7 +10,7 @@ const AllServiceData = () => {
     const {data:datas,refetch}=useQuery({
       queryKey:"datas",
       queryFn:async()=>{
-      const {data}=await axiosSeCure.get(`/alltests`);
+      const {data}=await axiosSeCure.get(`/alltests/adminAlltests`);
       return data;
       },
       })  

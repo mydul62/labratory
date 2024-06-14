@@ -4,8 +4,8 @@ import { PiPencilLineLight } from "react-icons/pi";
 
 const WeProvide = () => {
   return (
-    <div className=" max-w-7xl mx-auto  pt-[100px]">
-      <div className=" flex items-center justify-between ">
+    <div className=" max-w-7xl w-[90%] mx-auto  pt-[100px]">
+      <div className=" flex lg:flex-row flex-col gap-8 items-center justify-between ">
       <div className=" flex justify-center items-start gap-4">
       <span>
       <MdOutlineDesignServices  className="text-[#0767a7]" color="red" size={40} />

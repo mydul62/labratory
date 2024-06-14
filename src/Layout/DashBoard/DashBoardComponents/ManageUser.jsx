@@ -23,7 +23,13 @@ const ManageUser = () => {
   }
   const closeModal = () => setStatusOpen(false);
   const closeRoleModal = () => setRoleStatusOpen(false);
-  
+  function open(email) {
+    setIsEditModalOpen(true);
+    setModalInfo(email);
+  }
+
+
+
  
 
 
