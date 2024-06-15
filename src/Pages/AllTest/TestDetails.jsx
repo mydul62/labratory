@@ -87,45 +87,49 @@ const {data:serviceData,refetch}=useQuery({
    <div >
     <div
     style={{
-      backgroundImage: `linear-gradient(to left top,rgba(110, 193, 228, 0.6), rgba(110, 193, 228, 0.7), rgba(110, 193, 228, 0.1)), url('https://cdn.pixabay.com/photo/2017/04/08/11/07/nerve-cells-2213009_1280.jpg')`,
+      backgroundImage: `linear-gradient(to left top,rgba(110, 193, 228, 0.3), rgba(110, 193, 228, 0.9), rgba(110, 193, 228, 0.3)), url('https://cdn.pixabay.com/photo/2017/04/08/11/07/nerve-cells-2213009_1280.jpg')`,
       backgroundRepeat: "no-repeat",
       backgroundSize: 'cover',
       backgroundPosition: 'center bottom',
-    }} className="min-h-[400px] flex justify-center items-center bg-fixed">
-      <h1  className=" text-5xl text-white uppercase">tis is the item</h1>
+    }} className="min-h-[350px] rounded-b-md flex justify-center items-center bg-fixed">
+      <h1  className=" text-5xl text-white uppercase">{serviceData?.title}</h1>
     </div>
     <div className=" max-w-7xl w-[90%] mx-auto ">
     <div className=" w-full h-[510px] rounded-md mt-12">
      <img className=" w-full h-[510px] rounded-md" src={serviceData?.image} alt="" />
      </div>
-     <div className="grid grid-cols-6 gap-12 py-8 ">
-     <div  className=" col-span-4">
-  
-     <div className= " flex items-center justify-between ">
-     <div className=" flex items-center gap-4">
-     <button  className=" btn rounded-full py-1 px-8 bg-[#009fe3c8] text-white">{serviceData?.category}</button>
+     
+     <div className= " flex-wrap gap-3 flex items-center justify-between py-3 ">
+     <div className=" flex flex-wrap  items-center gap-4">
+     <button  className=" btn rounded-full btn-sm py-1 px-8 bg-[#009fe3c8] text-white">{serviceData?.category}</button>
      <span className=" flex items-center gap-1"><FaUser></FaUser>by admin
 </span>
 <span className=" flex items-center gap-1"><IoTimeOutline size={20}/>
 {serviceData?.date}</span>
      </div>
      <div className=" font-bold">
+     Service Charge:{serviceData?.price}tk
+     </div>
+     <div className=" font-bold">
      Availabale Slots:{serviceData?.slot}
      </div>
      </div>
+     <hr />
+     <div className=" flex flex-col-reverse lg:grid grid-cols-6 gap-12 py-8 ">
+     <div  className=" col-span-4">
+  
      <div>
-     <p>{serviceData?.description}</p>
+     <h1 className=" text-2xl font-bold mb-2 font-Source">{serviceData?.title}</h1>
+     <p className=" text-xl font-Lora">{serviceData?.description}</p>
      </div>
      </div>
-     <div className=" col-span-2 bg-[#edededd1] p-4 rounded-md ">
-     <div className=" rounded-md space-y-4">
-     <h1 className=" text-2xl font-Source">{serviceData?.title}</h1>
-     <h2 className="text-xl ">Slots: {serviceData?.slot}</h2>
-     <div className=" w-full border border-red-500 p-3">
+     <div className=" col-span-2  rounded-md ">
+     <div className=" rounded-md space-y-4 bg-[#edededd1] p-4">
+     <div className=" h-[300px] bg-green-300 w-full border border-red-500 p-3">
      Calender
      </div>
      <div>
-     <button onClick={()=>handleBookService(serviceData?._id)} className=" btn">Book Now</button>
+     <button onClick={()=>handleBookService(serviceData?._id)} className=" btn bg-blue-300 text-white">Book Now</button>
      </div>
      </div>
      </div>

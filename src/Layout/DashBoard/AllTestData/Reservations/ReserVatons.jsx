@@ -8,7 +8,7 @@ import { useState } from "react";
 const ReserVatons = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const [search, setSearch] = useState("");
+  const [email, setEmail] = useState("");
   const { data: reservations = [], refetch } = useQuery({
     queryKey: ["datas", id],
     queryFn: async () => {
@@ -27,10 +27,28 @@ const ReserVatons = () => {
       console.error("Failed to update status", error);
     }
   };
+      // --------------------------------cancel 
+ const handleCancel = async(id)=>{
+  const {data}=await axiosSecure.delete(`/alltest/Booking/Delete/${id}`)  ;
+  console.log(data);
+  refetch();
+}
+// search-----------------------
+const handleSearch = async (id, email) => {
+  console.log(`Searching for reservations with id: ${id} and email: ${email}`);
+  
+  if (email && id) {
+    try {
+      const { data } = await axiosSecure.get(`/alltest/Booking/reservations/search?id=${id}&email=${email}`);
+      console.log(`Received data: ${JSON.stringify(data)}`);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    }
+  } else {
+    console.error("Both id and email are required for searching");
+  }
+};
 
-  const handleSearch = () => {
-    // Implement search functionality here
-  };
 
   return (
     <div>
@@ -56,7 +74,7 @@ const ReserVatons = () => {
           <label className="input w-[600px] input-bordered flex items-center gap-2">
             Email
             <input
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               type="text"
               className="w-full"
               placeholder="abc@gmail.com"
@@ -229,7 +247,7 @@ const ReserVatons = () => {
                             </div>
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                            <button className="btn btn-sm rounded-full text-[red]">
+                            <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full text-[red]">
                               <RxCross2 size={20} />
                             </button>
                           </td>
