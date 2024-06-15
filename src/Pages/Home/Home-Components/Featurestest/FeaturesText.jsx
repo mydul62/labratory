@@ -31,7 +31,7 @@ const FeaturesTest = () => {
       swiper.slideNext();
     }
   };
-
+console.log(Datas);
   return (
     <div className=" max-w-7xl mx-auto w-[90%]">
     <div className=" py-16">
@@ -43,29 +43,27 @@ const FeaturesTest = () => {
         <Swiper {...sliderSettings} onSwiper={setSwiper}>
             {
             Datas?.map(data => (
-              <SwiperSlide key={data?._id}>
+              <SwiperSlide key={data?.bookingId}>
               <div >
+              <Link to={`/testdetail/${data?.bookingId}`}>
               <div  className=" border shadow-md border-[#eaeaea] rounded-lg">
                   <div className=" relative">
-                  <img className="object-cover w-full h-56 rounded-t-lg " src={data?.image} alt=""/>
+                  <img className="object-cover w-full h-[300px] rounded-t-lg " src={data?.image} alt=""/>
                   <button  className="absolute text-white  top-3 left-4 py-1 px-4  bg-[#1d6e7ee2] rounded-full">{data?.category}</button>
                   </div>
-                  <div className="flex flex-col justify-between space-y-4 py-6 md:py-6 md:p-0 p-3 lg:mx-6">
-                      <a href="#" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                          {data?.title?.slice(0,30)}...
+                  <div className="flex flex-col justify-between space-y-4 py-6 md:py-6 text-center md:p-0 p-3 lg:mx-6">
+                      <a href="#" className="text-2xl font-semibold text-gray-800 hover:underline dark:text-white ">
+                          {data?.title}
                       </a>
-                      
-                      <div className=" flex items-center justify-between">
+                      <h2 className=" text-xl font-Lora text-gray-600">Service charge: {data?.price}tk</h2>
+                      <div className=" flex items-center justify-center">
                       <span className="text-sm text-gray-500 dark:text-gray-300">On:{data?.appontmentData}</span>
-                      <div>
-                      <Link to={`/testdetail/${data?._id}`}>
-                      <button className=" btn rounded-full py-1 px-8 bg-[#2c8394b3] text-white">Details</button>
-                      </Link>
-                      </div>
+                    
                       
                       </div>
                   </div>
               </div>
+              </Link>
               </div>
               </SwiperSlide>
             ))}

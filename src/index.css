@@ -5,5 +5,5 @@
 
 
 .active{
-  border-bottom: 2px solid red;/* Optional: change text color when active */
+  border-bottom: 2px solid #00d2d3;/* Optional: change text color when active */
 }

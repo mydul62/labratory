@@ -23,22 +23,24 @@ const Banner = () => {
     }
   });
   return (
-    <div    style={{
-      backgroundImage: `linear-gradient(to left top, rgba(110, 193, 228, 0.2), rgba(110, 193, 228, 0.4), rgba(110, 193, 228, 0.1)), url('${banner?.image}')`,
+    <div style={{
+      backgroundImage: `linear-gradient(to left top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('${banner?.image}')`,
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-    }} className=" p-8  min-h-[700px] flex justify-center items-center flex-col text-center mx-4 md:mx-auto ">
-      <h1 className="text-5xl font-bold font-Lora text-gray-800 mb-4">{banner.title}</h1>
-      <p className="text-lg text-gray-700 mb-6">{banner.text}</p>
+    }} className=" py-8  min-h-screen flex justify-center items-center flex-col text-center md:mx-auto ">
+      <div>
+      <h1 className="lg:text-6xl text-4xl font-bold font-Lora text-white mb-4">{banner.title}</h1>
+      <p className="text-lg text-[#f3f1f1] mb-6">{banner.text}</p>
       {banner.couponCode && (
         <div className="mb-6">
-          <p className="text-lg font-semibold text-gray-800">Coupon Code: <span className="font-bold text-blue-600">{banner.couponCode}</span></p>
-          <p className="text-lg font-semibold text-gray-800">Discount: <span className="font-bold text-blue-600">{banner.discountRate}%</span></p>
+          <p className="text-lg font-semibold text-white">Coupon Code: <span className="font-bold text-blue-600">{banner.couponCode}</span></p>
+          <p className="text-lg font-semibold text-white">Discount: <span className="font-bold text-blue-600">{banner.discountRate}%</span></p>
         </div>
       )}
+      </div>
       <Link to={'/alltest'}><button
-        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+        className="bg-[#00d2d3] hover:bg-white hover:text-black text-white font-bold py-3 px-6 rounded-lg transition duration-300"
       >
         View All Tests
       </button></Link>

@@ -13,7 +13,6 @@ const Banners = () => {
       return data;
     }
   });
-console.log(banners);
   const handleBannerActive = (id)=>{
   console.log(id);
     axiosSecure.put(`/all_banners/${id}`)
@@ -25,6 +24,11 @@ console.log(banners);
       console.log(err);
     })
 
+  }
+  
+  const handleDeleteBanner = async(id)=>{
+  const {data} = await axiosSecure.delete(`/all_banners/${id}`);
+     console.log(data);
   }
 
   return (
@@ -47,7 +51,12 @@ console.log(banners);
         </p>
         <h2><span className=" text-xl font-bold">CouponCode</span> : {banner?.couponCode}</h2>
         <h2><span className=" text-xl font-bold">discountRate</span> : {banner?.discountRate}%</h2>
-        <div className="flex justify-end mt-3 items-center">
+        <div className="flex justify-between mt-3 items-center">
+          <button 
+          onClick={()=>handleDeleteBanner(banner?._id)}
+          className="px-2 py-1 btn btn-sm rounded-full text-xs font-bold text-white uppercase transition-colors transform bg-gray-800    focus:outline-none focus:bg-gray-700 ">
+          Delete
+          </button>
           <button onClick={()=>handleBannerActive(banner?._id)} className="px-2 py-1 btn btn-sm rounded-full text-xs font-bold text-white uppercase transition-colors transform bg-gray-800    focus:outline-none focus:bg-gray-700 ">
             {banner?.isActive?'active':'Deactive'}
           </button>

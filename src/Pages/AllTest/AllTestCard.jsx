@@ -35,7 +35,7 @@ const AllTestCard = ({data}) => {
           </div>
          </div>
           <div>
-           <Link to={`/testdetail/${data?._id}`}> <button className=" btn btn-sm">See Details</button></Link>
+           <Link to={`/testdetail/${data?._id}`}> <button className=" btn text-white bg-[#00d2d3]  btn-sm">See Details</button></Link>
             </div>
         </div>
       </div>

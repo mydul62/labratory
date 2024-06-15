@@ -21,6 +21,8 @@ import ReserVatons from "../Layout/DashBoard/AllTestData/Reservations/ReserVaton
 import ContactPage from "../Pages/ContactPage/ContactPage";
 import Banner from "../Pages/Home/Home-Components/Banner/Banner";
 import Banners from "../Layout/DashBoard/AddBanners/Banners";
+import TestResult from "../Layout/DashBoard/DashBoardComponents/TestResult/TestResult";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/contactus",
         element: <ContactPage></ContactPage>
+      },
+      {
+        path: "/aboutus",
+        element: <AboutUs></AboutUs>
       },
       {
         path: "/registration",
@@ -96,6 +102,10 @@ export const router = createBrowserRouter([
       {
         path: 'banners',
         element: <PriveteRoutes><Banners></Banners></PriveteRoutes>
+      },
+      {
+        path: 'test-result',
+        element: <PriveteRoutes><TestResult></TestResult></PriveteRoutes>
       },
     ]
   }
