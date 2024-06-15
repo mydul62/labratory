@@ -85,15 +85,8 @@ const Registration = () => {
 
   return (
     <section className="bg-white dark:bg-gray-900">
-      <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
+      <div className="container flex items-center justify-center min-h-screen py-28 mx-auto">
         <form onSubmit={handleRegistration} className="w-full max-w-md">
-          <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-7 sm:h-8"
-              src="https://merakiui.com/images/logo.svg"
-              alt="Logo"
-            />
-          </div>
 
           <div className="flex items-center justify-center mt-6">
             <a
@@ -124,6 +117,7 @@ const Registration = () => {
 
             <input
               type="text"
+              required
               name="userName"
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Username"
@@ -151,7 +145,7 @@ const Registration = () => {
 
             <h2 className="mx-3 text-gray-400">Profile Photo</h2>
 
-            <input id="dropzone-file" type="file" name="profilePhoto" />
+            <input id="dropzone-file" required type="file" name="profilePhoto" />
           </label>
 
           <div className="relative flex items-center mt-6">
@@ -174,6 +168,7 @@ const Registration = () => {
 
             <input
               type="email"
+              required
               name="emailAdress"
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Email address"
@@ -187,6 +182,7 @@ const Registration = () => {
 
             <select
               name="bloodGrupe"
+              required
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             >
               <option selected disabled value="Blood">Blood</option>
@@ -208,6 +204,7 @@ const Registration = () => {
 
             <select
               name="districs"
+              required
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             >
               <option selected disabled value="District">District</option>
@@ -226,6 +223,7 @@ const Registration = () => {
 
             <select
               name="upazilas"
+              required
               className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             >
               <option selected disabled value="upazila">Upazilas</option>
@@ -257,6 +255,7 @@ const Registration = () => {
 
             <input
               name="password"
+              required
               type="password"
               className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Password"
@@ -283,6 +282,7 @@ const Registration = () => {
 
             <input
               name="confirmPassword"
+              required
               type="password"
               className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
               placeholder="Confirm Password"

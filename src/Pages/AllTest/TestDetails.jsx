@@ -20,17 +20,6 @@ const TestDetails = () => {
 const closeModal = () => setIsEditModalOpen(false);
 
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- let currentDate = new Date();
- let formattedDate = currentDate.toISOString().split('T')[0];
 const {id}=useParams()
 const {data:serviceData,refetch}=useQuery({
   queryKey:["tests",id],
@@ -40,46 +29,10 @@ const {data:serviceData,refetch}=useQuery({
   }
   })
   
-  const updateSlot = async () => {
-    const updateSlot = {
-        slot: serviceData?.slot - 1,
-    };
-    if(updateSlot){
-      const { data } = await axiosSecure.patch(`/alltest/slot/${id}`, updateSlot);
-      console.log(data);
-    
-    }
-};
+ 
   
   const handleBookService = (id)=>{
     open(id)
-      // const serviceDetails = {
-      // title: serviceData?.title,
-      // description: serviceData?.description,
-      // price: serviceData?.price,
-      // image: serviceData?.image,
-      // BookedDate: formattedDate,
-      // status:'panding',
-      // appontmentData:serviceData?.date,
-      // category: serviceData?.category,
-      // userName: user?.displayName,
-      // userEmail: user?.email,
-      // bookingId : id,
-      // }
-      
-      
-      
-      
-      
-      // const postService = async()=>{
-      //   const {data} = await axiosSecure.post('/alltest/Booking',serviceDetails);
-      //   if(data.insertedId){
-      //     refetch();
-      //      alert("Inserted")
-      //      updateSlot()   
-      //   }
-      // }
-      // postService();
 
   }
  
@@ -129,13 +82,13 @@ const {data:serviceData,refetch}=useQuery({
      Calender
      </div>
      <div>
-     <button onClick={()=>handleBookService(serviceData?._id)} className=" btn bg-blue-300 text-white">Book Now</button>
+     <button disabled={serviceData?.slot<=0}  onClick={()=>handleBookService(serviceData?._id)} className=" btn bg-blue-300 text-white">Book Now</button>
      </div>
      </div>
      </div>
      </div>
     </div>
-    <TestModal isOpen={isOpen} closeModal={closeModal} id={modalInfo} serviceData={serviceData}  ></TestModal>
+    <TestModal isOpen={isOpen} closeModal={closeModal} id={modalInfo} serviceData={serviceData} refetch={refetch}   ></TestModal>
    </div>
   );
 };

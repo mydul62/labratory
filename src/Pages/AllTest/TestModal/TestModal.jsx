@@ -2,8 +2,17 @@ import PropTypes from 'prop-types';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import { useEffect, useState } from 'react';
+import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from '../CheckoutForm';
 
-const TestModal = ({ isOpen, closeModal, serviceData }) => {
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+
+
+
+
+
+const TestModal = ({ isOpen, closeModal, serviceData ,id,refetch }) => {
   const axiosSecure = useAxiosSecure();
   const [getPromo, setGetPromo] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -15,7 +24,8 @@ const TestModal = ({ isOpen, closeModal, serviceData }) => {
         const { data } = await axiosSecure.get(`/all_banners/getpromo?couponCode=${newPromocode}`);
         if (data.discountRate) {
           const discountValue = parseInt(serviceData?.price) * (parseInt(data.discountRate) / 100);
-          setDiscount(discountValue);
+          const actualDiscount = (parseInt(serviceData?.price)-discountValue).toFixed(2);
+          setDiscount(actualDiscount);
           console.log(parseInt(serviceData?.price),parseInt(data.couponCode));
           Swal.fire('Success',' Promo code applied!');
         } else {
@@ -40,7 +50,7 @@ const TestModal = ({ isOpen, closeModal, serviceData }) => {
           <h1>Service Charge: {serviceData?.price}tk</h1>
           <h1>Service Date: {serviceData?.date}</h1>
         </div>
-        <div className="my-5 px-6">
+        <div className="my-5 lg:px-6">
           <label className="input input-bordered flex items-center gap-2">
             <input
               onChange={(e) => setGetPromo(e.target.value)}
@@ -53,18 +63,18 @@ const TestModal = ({ isOpen, closeModal, serviceData }) => {
             </button>
           </label>
         </div>
-        <h2>Discounted Rate: {discount ? (serviceData?.price - discount).toFixed(2) : serviceData?.price}tk</h2>
+        <h2>Discounted Rate: {discount ?discount : serviceData?.price}tk</h2>
+        <div className=' my-6'>
+        <Elements stripe={stripePromise}>
+        <CheckoutForm serviceData={serviceData} discount={discount} id ={id} closeModal={closeModal} refetch={refetch}></CheckoutForm>
+        </Elements>
+        </div>
         <div className="mt-6 flex justify-between">
           <button
             onClick={closeModal}
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
           >
             Cancel
-          </button>
-          <button
-            className="px-4 w-full ml-2 py-2 bg-green-400 text-white rounded hover:bg-red-700"
-          >
-            Pay
           </button>
         </div>
       </div>

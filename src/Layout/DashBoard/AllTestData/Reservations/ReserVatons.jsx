@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { RxCross2 } from "react-icons/rx";
+import { RxCross2, RxVercelLogo } from "react-icons/rx";
 import { MdOutlineBrowserUpdated } from "react-icons/md";
 import { useState } from "react";
 
@@ -16,15 +16,39 @@ const ReserVatons = () => {
       return data;
     },
   });
-
-  const handleStatusChange = async (e, id) => {
-    const newStatus = e.target.value;
-    console.log(newStatus);
+  
+  const handlestatus = async(status,id)=>{
+    const newStatus = status;
     try {
       await axiosSecure.patch(`/allTests/booking/statusUpdate/status/${id}`, { status: newStatus });
       refetch(); // refetch data to get the updated status
     } catch (error) {
       console.error("Failed to update status", error);
+    }
+  }
+
+  const handleStatusChange = async (status, appointment, id) => {
+    try {
+      handlestatus(status, id);
+      console.log('Status changed to:', status);
+      
+      const reservations = {
+        ...appointment,
+        status, // Ensure status is included
+      };
+  
+      console.log('Updated reservations:', reservations);
+  
+      if (reservations.status === 'delivared') {
+        const { data } = await axiosSecure.post('/allTests/booking/booking-result/submit-result', reservations);
+       if(data.insertedId){
+       alert("data Inserted")
+       }else{
+       alert("already inserted")
+       }
+      }
+    } catch (error) {
+      console.error('Error handling status change:', error);
     }
   };
       // --------------------------------cancel 
@@ -234,17 +258,7 @@ const handleSearch = async (id, email) => {
                             {appointment?.appontmentData}
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                            <div className="py-1">
-                              <select
-                                disabled={appointment.status === "delivered"}
-                                value={appointment?.status}
-                                onChange={(e) => handleStatusChange(e, appointment?._id)}
-                                className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-gray-700"
-                              >
-                                <option value="pending">Pending</option>
-                                <option value="delivered">Delivered</option>
-                              </select>
-                            </div>
+                          <button disabled = {appointment?.status=="delivared"} className=" btn btn-sm bg-green-400 text-white" onClick={() => handleStatusChange("delivared",appointment, appointment?._id)}>{appointment?.status}</button>
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                             <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full text-[red]">
