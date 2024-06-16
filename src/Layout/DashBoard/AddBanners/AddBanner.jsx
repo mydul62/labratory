@@ -3,7 +3,7 @@ import React from 'react';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2'
 
-const AddBanner = () => {
+const AddBanner = ({refetch}) => {
   const axiosSecure = useAxiosSecure()
   const handleBannerAdd = async (e) => {
     e.preventDefault();
@@ -42,6 +42,7 @@ const AddBanner = () => {
     try {
       const { data } = await axiosSecure.post('/all_banners', bannerData);
       if(data.insertedId){
+        refetch()
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -58,9 +59,9 @@ const AddBanner = () => {
   };
 
   return (
-    <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+    <section className="max-w-4xl p-6 mx-auto  bg-white rounded-md shadow-md dark:bg-gray-800">
       <div className="flex justify-center my-6">
-        <h2 className="uppercase inline-block text-center text-2xl border-b-4 rounded-b-lg font-semibold text-gray-700">Add Banner</h2>
+        <h2 className="uppercase inline-block text-center border-[#00d2d3] text-2xl border-b-4 rounded-b-lg font-semibold text-gray-700">Add Banner</h2>
       </div>
       <form onSubmit={handleBannerAdd}>
         <div className="space-y-4">
@@ -68,6 +69,7 @@ const AddBanner = () => {
             <label className="text-gray-700 dark:text-gray-200" htmlFor="title">Title</label>
             <input
               id="title"
+              required
               name="title"
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -77,6 +79,7 @@ const AddBanner = () => {
             <label className="text-gray-700 dark:text-gray-200" htmlFor="couponCode">Coupon Code</label>
             <input
               id="couponCode"
+              required
               name="couponCode"
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -86,6 +89,7 @@ const AddBanner = () => {
             <label className="text-gray-700 dark:text-gray-200" htmlFor="discountRate">Discount Rate</label>
             <input
               id="discountRate"
+              required
               name="discountRate"
               type="number"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -95,6 +99,7 @@ const AddBanner = () => {
             <label className="text-gray-700 dark:text-gray-200" htmlFor="text">Text</label>
             <input
               id="text"
+              required
               name="text"
               type="text"
               className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
@@ -127,6 +132,7 @@ const AddBanner = () => {
                 </p>
                 <input
                   id="dropzone-file"
+                  required
                   type="file"
                   name="image"
                   className="hidden"
@@ -139,7 +145,7 @@ const AddBanner = () => {
           </div>
         </div>
         <div className="flex justify-end mt-6">
-          <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+          <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform rounded-md  focus:outline-none bg-[#00d2d3]">
             Save
           </button>
         </div>

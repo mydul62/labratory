@@ -31,7 +31,7 @@ const AllTest = () => {
   return (
     <div className="">
      <div style={{
-  backgroundImage: `linear-gradient(to left top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://mida.peerduck.com/wp-content/uploads/2023/03/k43jtng.png)`,
+  backgroundImage: `linear-gradient(to left top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(https://img.freepik.com/free-photo/copy-space-glasses-stethoscope_23-2148519794.jpg?w=1380&t=st=1718458369~exp=1718458969~hmac=9d53d94ec5fdf8a7e6ef02178272f81ea3b054cd0493ed43e52094135a80f5ce)`,
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',

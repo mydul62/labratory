@@ -29,7 +29,7 @@ const Profile = () => {
   };
 
   const { data: userInformations ,refetch} = useQuery({
-    queryKey: "userInformations",
+    queryKey: ["userInformations",email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/allusers/email/${email}`);
       return data;
@@ -79,7 +79,7 @@ const Profile = () => {
               <div className="flex flex-col gap-2">
                 <button
                   onClick={openModal}
-                  className="bg-[#F43F5E] px-8 py-2 rounded-lg text-white cursor-pointer hover:bg-[#af4053]"
+                  className="bg-[#00d2d3] px-8 py-2 rounded-lg text-white cursor-pointer hover:bg-[#af4053]"
                 >
                   Update Profile
                 </button>

@@ -26,7 +26,7 @@ const AllServiceData = () => {
             <section className=" px-4 ">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 dark:text-white">
-          datas
+          Datas
           </h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
@@ -151,10 +151,10 @@ const AllServiceData = () => {
                       <Link to={`/dashboard/reservation/${data?._id}`}> <button className=" btn btn-sm bg-[#597e5c] text-white">View Reservations</button></Link>
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                       <Link to={`/dashboard/Updates/${data?._id}`} > <button className="btn btn-sm rounded-full bg-[]"><FaPencil  size={20} color="red" />
+                       <Link to={`/dashboard/Updates/${data?._id}`} > <button className="btn btn-sm rounded-full bg-[]"><FaPencil  size={20} color="#00d2d3" />
                        </button></Link>
                       </td>
-                      <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                      <td className=" text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                         <button onClick={()=>handleDelete(data?._id)} className="btn btn-sm rounded-full bg-[]"><RiDeleteBin5Line size={20} color="red" />
                         </button>
                       </td>

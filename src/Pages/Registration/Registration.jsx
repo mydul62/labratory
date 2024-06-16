@@ -84,14 +84,14 @@ const Registration = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container flex items-center justify-center min-h-screen py-28 mx-auto">
-        <form onSubmit={handleRegistration} className="w-full max-w-md">
+    <section className="bg-white  dark:bg-gray-900">
+      <div className="container flex items-center justify-center min-h-screen mx-auto">
+        <form onSubmit={handleRegistration} className="w-full max-w-lg">
 
           <div className="flex items-center justify-center mt-6">
             <a
               href="#"
-              className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
+              className="w-1/3 pb-4 font-medium text-center text-2xl text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
             >
               sign up
             </a>
@@ -294,7 +294,7 @@ const Registration = () => {
               Sign Up
             </button>
 
-            <div className="mt-6 text-center">
+            <div className="my-6 text-center">
               <Link to="/login" className="text-sm text-blue-500 hover:underline dark:text-blue-400">
                 Already have an account?
                 <span className="underline"> Sign in</span>

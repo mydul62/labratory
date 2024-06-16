@@ -76,7 +76,7 @@ const Recomendation = () => {
     const currentTestimonial = testimonials[currentIndex];
 
     return (
-        <section className="bg-green-200 dark:bg-themeColor sm:my-[100px] py-20">
+        <section className=" dark:bg-themeColor  py-20">
             <style>{`
                 @keyframes slide-in-right {
                     from {
@@ -132,13 +132,13 @@ const Recomendation = () => {
                 }
             `}</style>
             <div className="w-[95%]  mx-auto overflow-x-hidden ">
-                <p className="text-xl text-black font-montserrat font-bold text-center">Testimonials</p>
+                <p className="text-xl font-montserrat font-bold text-center">Testimonials</p>
                 <h1 className="mt-2 text-2xl font-semibold text-black font-poppins text-center capitalize lg:text-4xl dark:text-white">
-                    Employees Are Say
+                    What Our Patients Are Say
                 </h1>
                 <main className="relative z-20 w-full mt-8 md:flex md:items-center xl:mt-12">
-                    <div className={`absolute w-full bg-pmColor -z-10 md:h-96 rounded-2xl`}></div>
-                    <div className={`w-full p-6 bg-pmColor md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly ${animate ? (direction === 'right' ? 'slide-in-right' : 'slide-in-left') : ''}`}>
+                    <div className={`absolute w-full bg-[#00d2d3] -z-10 md:h-96 rounded-2xl`}></div>
+                    <div className={`w-full p-6 bg-[#00d2d3] md:flex md:items-center rounded-2xl md:bg-transparent md:p-0 lg:px-12 md:justify-evenly ${animate ? (direction === 'right' ? 'slide-in-right' : 'slide-in-left') : ''}`}>
                         <img
                             className={`h-24 w-24 md:mx-6 rounded-full shadow-xl object-cover md:h-[32rem] md:w-80 lg:h-[36rem] lg:w-[26rem] md:rounded-2xl ${animate ? (direction === 'right' ? 'slide-in-right' : 'slide-in-left') : ''}`}
                             src={currentTestimonial.photo}

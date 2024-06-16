@@ -10,8 +10,23 @@ import TestModal from "./TestModal/TestModal";
 const TestDetails = () => {
  const axiosSecure = useAxiosSecure()
  const {user}=useAuthProvider()
+ const email = user?.email;
  let [isOpen, setIsEditModalOpen] = useState(false);
  const [modalInfo,setModalInfo]=useState()
+ 
+ 
+ 
+ const { data:userInformations} = useQuery({
+  queryKey: ["userInformations",email],
+  queryFn: async () => {
+    const { data } = await axiosSecure.get(`/allusers/email/${email}`);
+    return data;
+  },
+});
+
+ 
+ 
+ 
  
  function open(id) {
   setIsEditModalOpen(true);
@@ -31,9 +46,10 @@ const {data:serviceData,refetch}=useQuery({
   
  
   
+  
+  
   const handleBookService = (id)=>{
     open(id)
-
   }
  
   return (
@@ -82,7 +98,7 @@ const {data:serviceData,refetch}=useQuery({
      Calender
      </div>
      <div>
-     <button disabled={serviceData?.slot<=0}  onClick={()=>handleBookService(serviceData?._id)} className=" btn bg-blue-300 text-white">Book Now</button>
+     <button disabled={serviceData?.slot<=0 ||  userInformations?.status=='blocked'}  onClick={()=>handleBookService(serviceData?._id)} className=" btn bg-blue-300 text-white">Book Now</button>
      </div>
      </div>
      </div>

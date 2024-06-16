@@ -31,9 +31,8 @@ const FeaturesTest = () => {
       swiper.slideNext();
     }
   };
-console.log(Datas);
   return (
-    <div className=" max-w-7xl mx-auto w-[90%]">
+    <div className=" max-w-7xl mx-auto mb-16 w-[90%]">
     <div className=" py-16">
     <FeaturesTitle ></FeaturesTitle>
     </div>
@@ -49,7 +48,7 @@ console.log(Datas);
               <div  className=" border shadow-md border-[#eaeaea] rounded-lg">
                   <div className=" relative">
                   <img className="object-cover w-full h-[300px] rounded-t-lg " src={data?.image} alt=""/>
-                  <button  className="absolute text-white  top-3 left-4 py-1 px-4  bg-[#1d6e7ee2] rounded-full">{data?.category}</button>
+                  <button  className="absolute text-white  top-3 left-4 py-1 px-4  bg-[#00d2d3] rounded-full">{data?.category}</button>
                   </div>
                   <div className="flex flex-col justify-between space-y-4 py-6 md:py-6 text-center md:p-0 p-3 lg:mx-6">
                       <a href="#" className="text-2xl font-semibold text-gray-800 hover:underline dark:text-white ">
@@ -69,11 +68,11 @@ console.log(Datas);
             ))}
         </Swiper>
         <div className="absolute -bottom-20 right-0 z-10 flex gap-4 mb-4 md:mb-0 md:-top-20">
-          <button className="btn bg-[#27ae60]" onClick={slideToPrev}>
-            <GrPrevious size={20} />
+          <button className="btn bg-[#00d2d3]" onClick={slideToPrev}>
+            <GrPrevious color="#fff" size={20} />
           </button>
-          <button className="btn bg-[#27ae60]" onClick={slideToNext}>
-            <GrNext size={20} />
+          <button className="btn bg-[#00d2d3]" onClick={slideToNext}>
+            <GrNext color="#fff" size={20} />
           </button>
         </div>
       </div>

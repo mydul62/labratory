@@ -23,10 +23,12 @@ import Banner from "../Pages/Home/Home-Components/Banner/Banner";
 import Banners from "../Layout/DashBoard/AddBanners/Banners";
 import TestResult from "../Layout/DashBoard/DashBoardComponents/TestResult/TestResult";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -48,16 +50,15 @@ export const router = createBrowserRouter([
         path: "/aboutus",
         element: <AboutUs></AboutUs>
       },
-      {
-        path: "/registration",
-        element: <Registration />
-      },
-      {
-        path: "/login",
-        element: <Login />
-      }
-      
     ]
+  },
+  {
+    path: "/registration",
+    element: <Registration />
+  },
+  {
+    path: "/login",
+    element: <Login />
   },
   {
     path: "/dashboard",

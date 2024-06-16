@@ -63,7 +63,12 @@ const AddTest = () => {
   };
 
   return (
-    <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'>
+    <div className='w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50'> 
+    <div>
+    <h2 className=" text-3xl font-bold font-Lora">  
+    Add A Service
+    </h2>
+    </div>
       <form onSubmit={handleServiceAdd} className="md:w-[60%] mx-auto">
         <div className='space-y-6'>
           <div className='space-y-1 text-sm'>
@@ -92,7 +97,7 @@ const AddTest = () => {
                     accept='image/*'
                     hidden
                   />
-                  <div className='bg-rose-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500'>
+                  <div className='bg-[#00d2d3] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-rose-500'>
                     Upload Image
                   </div>
                 </label>
@@ -167,7 +172,7 @@ const AddTest = () => {
             </label>
             <textarea
               id='description'
-              className='block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800 border border-rose-300 focus:outline-rose-500'
+              className='block rounded-md focus:rose-300 w-full h-32 px-4 py-3 text-gray-800 border border-rose-300 focus:outline-[#00d2d3]'
               name='description'
             ></textarea>
           </div>
@@ -175,7 +180,7 @@ const AddTest = () => {
 
         <button
           type='submit'
-          className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-rose-500'
+          className='w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-[#00d2d3]'
         >
           Save & Continue
         </button>

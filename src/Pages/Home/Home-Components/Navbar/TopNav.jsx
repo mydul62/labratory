@@ -3,9 +3,23 @@ import useAuthProvider from "../../../../Hooks/useAuthProvider";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { BsStopwatchFill } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const TopNav = () => {
 const {logout,user}=useAuthProvider()
+const email =user?.email;
+const axiosSecure = useAxiosSecure()
+
+const { data:userInformations} = useQuery({
+  queryKey: ["userInformations",email],
+  queryFn: async () => {
+    const { data } = await axiosSecure.get(`/allusers/email/${email}`);
+    return data;
+  },
+});
+console.log(userInformations);
+
   return (
     <div className=" bg-white">
      <div className=" bg-white flex justify-between items-center max-w-7xl w-[90%] mx-auto py-2">
@@ -21,7 +35,7 @@ const {logout,user}=useAuthProvider()
                 user?<div className=' flex md:flex-row items-center flex-col gap-4'>
                 <div className="w-6 h-6 overflow-hidden border-2 border-gray-400 rounded-full">
                 <div>
-                <NavLink > <img src={user?.photoURL} alt="avatar" /></NavLink>
+                <NavLink > <img src={userInformations?.image} alt="avatar" /></NavLink>
                 </div>
                  
                 </div>
