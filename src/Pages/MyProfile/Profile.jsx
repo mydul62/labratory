@@ -3,6 +3,7 @@ import useAuthProvider from "../../Hooks/useAuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UpdateProfileModal from "./UpdateProfileModal";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Profile = () => {
   const { user, passwordReset } = useAuthProvider();
@@ -21,7 +22,7 @@ const Profile = () => {
   const handleResetPassword = () => {
     passwordReset(email)
       .then(() => {
-        alert("Password reset link has been sent to your email");
+        Swal.fire("Check uour email to reset!");
       })
       .catch((error) => {
         console.log(error);
@@ -37,7 +38,7 @@ const Profile = () => {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-[calc(100vh-70px)] bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg max-w-[800px] w-full p-6">
         <div className="flex items-center justify-center">
           <img

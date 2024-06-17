@@ -1,20 +1,18 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuthProvider from "../Hooks/useAuthProvider";
 
-import { FidgetSpinner } from 'react-loader-spinner'
+import {  InfinitySpin } from 'react-loader-spinner'
 
 const PriveteRoutes = ({children}) => {
 const {user,loading}=useAuthProvider();
 const location = useLocation();
 if(loading){
 return <div className=" min-h-screen flex justify-center items-center">
- <FidgetSpinner
-visible={true}
-height="80"
-width="80"
-ariaLabel="fidget-spinner-loading"
-wrapperStyle={{}}
-wrapperClass="fidget-spinner-wrapper"
+ <InfinitySpin
+ visible={true}
+ width="200"
+ color="#4fa94d"
+ ariaLabel="infinity-spin-loading"
 />
 </div>
 }

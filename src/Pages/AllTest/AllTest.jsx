@@ -15,17 +15,20 @@ const AllTest = () => {
  const [searchDate, setSearchDate] = useState()
  const formatteddate = startDate.toISOString().split('T')[0];
   const {data:Datas}=useQuery({
-    queryKey:"datas",
+    queryKey:["datas",searchDate],
     queryFn:async()=>{
-    const {data}=await axiosSeCure.get(`/alltests`);
-    return data;
+             if(searchDate){
+              const {data}=await axiosSeCure.get(`/alltests?search=${searchDate}`);
+              return data;
+             }
+             const {data}=await axiosSeCure.get(`/alltests`);
+             return data;
     },
     })  
     
     const handleSerch=()=>{
     setSearchDate(formatteddate);
     }
-    console.log(searchDate);
 
     
   return (
@@ -35,11 +38,11 @@ const AllTest = () => {
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
-}} className=" flex items-center min-h-[500px] ">
+}} className=" flex items-center min-h-[400px] ">
     <div className="w-full mx-auto justify-start">
     
-    <div className=" max-w-7xl mx-auto  space-y-6  ">
- <h2 className="md:text-8xl text-7xl   text-[#004552] font-Lora ">Our services
+    <div className=" max-w-7xl mx-auto mt-10  space-y-6  ">
+ <h2 className="md:text-6xl text-5xl   text-[#004552] font-Lora ">Our services
 .</h2>
   <h2 className=" text-2xl text-[#595959]">Get the answers you need for a healthier you at our medical diagnostic center.</h2>
  </div>
@@ -57,14 +60,45 @@ const AllTest = () => {
           <button onClick={handleSerch}  className=" py-3 px-8 rounded-lg  bg-[#00d2d3]  border">Search</button>
    
           </div>
-        <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-3">
+           {
+           Datas?<div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-3">
            {
            Datas?.map(data=>(
           <AllTestCard key={data?._id} data={data} ></AllTestCard>
            ))
            }
+        </div>:<div className=" flex-col flex justify-center items-center h-[calc(100vh-600px)]">
+        
+        <h3 className=" text-3xl font-bold">Data not found</h3>
+        <p>Enter Valid email</p>
         </div>
+           
+           }
     </div>
+    
+    
+    <div className="flex justify-center py-3 mb-12">
+      <a href="#" className="flex items-center px-4 py-2 mx-1 text-gray-500 bg-white rounded-md cursor-not-allowed dark:bg-gray-800 dark:text-gray-600">
+        Previous
+      </a>
+
+      <a href="#" className="items-center hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+        1
+      </a>
+
+      <a href="#" className="items-center hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+        2
+      </a>
+
+      <a href="#" className="items-center hidden px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+        3
+      </a>
+
+      <a href="#" className="flex items-center px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md dark:bg-gray-800 dark:text-gray-200 hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-gray-200">
+        Next
+      </a>
+    </div>
+    
 </div>
     </div>
   );

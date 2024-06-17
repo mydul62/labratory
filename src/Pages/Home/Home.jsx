@@ -1,7 +1,8 @@
 import Banner from "./Home-Components/Banner/Banner";
 import FeaturesText from "./Home-Components/Featurestest/FeaturesText";
-import Recomendation from "./Home-Components/Recomendation/Recomendation";
+import Promotionals from "./Home-Components/promotional/Promotionals";
 import WeProvide from "./Home-Components/WeProvide/WeProvide";
+import Testiminials from "./Home-Components/testimonial/Testiminials";
 
 const Home = () => {
   return (
@@ -16,8 +17,13 @@ const Home = () => {
     <FeaturesText />
     </div>
     <div>
-    <Recomendation></Recomendation>
+    <Promotionals></Promotionals>
     </div>
+    <div>
+<Testiminials></Testiminials>    
+</div>
+
+
     </div>
   );
 };

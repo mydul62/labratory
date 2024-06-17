@@ -24,6 +24,7 @@ import Banners from "../Layout/DashBoard/AddBanners/Banners";
 import TestResult from "../Layout/DashBoard/DashBoardComponents/TestResult/TestResult";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import BlogSection from "../Pages/BlogSection/BlogSection";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs></AboutUs>
+      },
+      {
+        path: "/blog",
+        element: <BlogSection></BlogSection>
       },
     ]
   },

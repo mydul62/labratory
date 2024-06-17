@@ -24,7 +24,7 @@ const handleStatusChange = async () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0000001b] bg-opacity-50">
       <div className="bg-white rounded-lg p-8 w-full max-w-md mx-auto">
         <h2 className="text-2xl font-semibold text-gray-800">Update Status Now</h2>
         <div className="mt-4">

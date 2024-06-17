@@ -16,7 +16,7 @@ const FeaturesTest = () => {
     const {data:Datas}=useQuery({
       queryKey:["appoinments"],
       queryFn:async()=>{
-      const {data}=await axiosCommpn.get(`/alltest/Booking`);
+      const {data}=await axiosCommpn.get(`/alltest/Booking/features`);
       return data;
       }
       })
@@ -32,7 +32,7 @@ const FeaturesTest = () => {
     }
   };
   return (
-    <div className=" max-w-7xl mx-auto mb-16 w-[90%]">
+    <div className=" max-w-7xl mx-auto w-[90%]">
     <div className=" py-16">
     <FeaturesTitle ></FeaturesTitle>
     </div>

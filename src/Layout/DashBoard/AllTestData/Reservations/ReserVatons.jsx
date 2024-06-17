@@ -4,75 +4,124 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { RxCross2, RxVercelLogo } from "react-icons/rx";
 import { MdOutlineBrowserUpdated } from "react-icons/md";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ReserVatons = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [email, setEmail] = useState("");
   const { data: reservations = [], refetch } = useQuery({
-    queryKey: ["datas", id],
+    queryKey: ["datas", id,email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/alltest/Booking/reservations/${id}`);
-      return data;
+      if (!email) {
+        const { data } = await axiosSecure.get(
+          `/alltest/Booking/reservations/${id}`
+        );
+        return data;
+      }else{
+       const {data} =await handleSearch()
+       return data;
+      }
     },
   });
-  
-  const handlestatus = async(status,id)=>{
+
+  const handleSearch = async () => {
+    if (email && id) {
+    
+      try {
+        const { data } = await axiosSecure.get(
+          "/alltest/Booking/reservations/search/search-item",
+          {
+            params: { id, email },
+          }
+        );
+        return {data}
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    } else {
+      console.error("Both id and email are required for searching");
+    }
+  };
+
+  const handlestatus = async (status, id) => {
     const newStatus = status;
     try {
-      await axiosSecure.patch(`/allTests/booking/statusUpdate/status/${id}`, { status: newStatus });
+      await axiosSecure.patch(`/allTests/booking/statusUpdate/status/${id}`, {
+        status: newStatus,
+      });
       refetch(); // refetch data to get the updated status
     } catch (error) {
       console.error("Failed to update status", error);
     }
-  }
+  };
 
   const handleStatusChange = async (status, appointment, id) => {
     try {
       handlestatus(status, id);
-      console.log('Status changed to:', status);
-      
+      console.log("Status changed to:", status);
+
       const reservations = {
         ...appointment,
         status, // Ensure status is included
       };
-  
-      console.log('Updated reservations:', reservations);
-  
-      if (reservations.status === 'delivared') {
-        const { data } = await axiosSecure.post('/allTests/booking/booking-result/submit-result', reservations);
-       if(data.insertedId){
-       alert("data Inserted")
-       }else{
-       alert("already inserted")
-       }
+
+      console.log("Updated reservations:", reservations);
+
+      if (reservations.status === "delivared") {
+        const { data } = await axiosSecure.post(
+          "/allTests/booking/booking-result/submit-result",
+          reservations
+        );
+        if (data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Sevices Delivared",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          Swal.fire("already inserted!");
+
+        }
       }
     } catch (error) {
-      console.error('Error handling status change:', error);
+      console.error("Error handling status change:", error);
     }
   };
-      // --------------------------------cancel 
- const handleCancel = async(id)=>{
-  const {data}=await axiosSecure.delete(`/alltest/Booking/Delete/${id}`)  ;
-  console.log(data);
-  refetch();
-}
-// search-----------------------
-const handleSearch = async (id, email) => {
-  console.log(`Searching for reservations with id: ${id} and email: ${email}`);
-  
-  if (email && id) {
-    try {
-      const { data } = await axiosSecure.get(`/alltest/Booking/reservations/search?id=${id}&email=${email}`);
-      console.log(`Received data: ${JSON.stringify(data)}`);
-    } catch (error) {
-      console.error("Error fetching data", error);
-    }
-  } else {
-    console.error("Both id and email are required for searching");
-  }
-};
-
+  // --------------------------------cancel
+  const handleCancel = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await axiosSecure.delete(`/alltest/Booking/Delete/${id}`);
+    console.log(data);
+    refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        } catch (error) {
+          console.error("Error deleting banner:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "There was an issue deleting your file.",
+            icon: "error"
+          });
+        }
+      }
+    });
+  };
 
   return (
     <div>
@@ -101,11 +150,8 @@ const handleSearch = async (id, email) => {
               onChange={(e) => setEmail(e.target.value)}
               type="text"
               className="w-full"
-              placeholder="abc@gmail.com"
+              placeholder="Enter proper email to search"
             />
-            <button onClick={handleSearch} className="btn btn-sm">
-              Search
-            </button>
           </label>
         </div>
       </div>
@@ -258,10 +304,25 @@ const handleSearch = async (id, email) => {
                             {appointment?.appontmentData}
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                          <button disabled = {appointment?.status=="delivared"} className=" btn btn-sm bg-green-400 text-white" onClick={() => handleStatusChange("delivared",appointment, appointment?._id)}>{appointment?.status}</button>
+                            <button
+                              disabled={appointment?.status == "delivared"}
+                              className=" btn btn-sm bg-green-400 text-white"
+                              onClick={() =>
+                                handleStatusChange(
+                                  "delivared",
+                                  appointment,
+                                  appointment?._id
+                                )
+                              }
+                            >
+                              {appointment?.status}
+                            </button>
                           </td>
                           <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                            <button onClick={()=>handleCancel(appointment?._id)} className="btn btn-sm rounded-full text-[red]">
+                            <button
+                              onClick={() => handleCancel(appointment?._id)}
+                              className="btn btn-sm rounded-full text-[red]"
+                            >
                               <RxCross2 size={20} />
                             </button>
                           </td>

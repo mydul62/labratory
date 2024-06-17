@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from 'sweetalert2';
+import { setLogLevel } from "firebase/app";
 
 const UpdateService = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,26 +23,16 @@ const UpdateService = () => {
     }
   });
 
-  // Format the date string from formDatas
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      timeZone: 'Asia/Dhaka',
-      timeZoneName: 'short'
-    }).format(date);
-  };
+  // State to manage the selected date
+  const [startDate, setStartDate] = useState(new Date());
 
-  const initialDate = formDatas ? new Date(formDatas.date) : new Date();
-  const [startDate, setStartDate] = useState(initialDate);
+  // Update startDate when formDatas changes
+  useEffect(() => {
+    if (formDatas) {
+      setStartDate(new Date(formDatas.date));
+    }
+  }, [formDatas]);
 
-  // Format the selected date
   const formattedDate = startDate.toISOString().split('T')[0];
 
   const { data: categories } = useQuery({
@@ -89,7 +80,6 @@ const UpdateService = () => {
       slot,
       category
     };
-
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -103,6 +93,7 @@ const UpdateService = () => {
     if (result.isConfirmed) {
       try {
         const { data } = await axiosSecure.put(`/Alltests/tests/test/update/${id}`, service);
+        console.log(data);
         navigate("/dashboard/alltest");
       } catch (error) {
         console.error('Error updating service:', error);

@@ -4,27 +4,25 @@ const testimonials = [
     {
         id: 1,
         name: 'Ema Watson',
-        position: 'Marketing Manager at Stech',
         photo: 'https://images.pexels.com/photos/532220/pexels-photo-532220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        testimonial: '“Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda”.'
+        testimonial: '“The diagnostic services provided here are top-notch. The staff is professional and caring, making the entire process smooth and stress-free. Highly recommended!”'
     },
     {
         id: 2,
         name: 'John Doe',
-        position: 'CEO at Company',
         photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        testimonial: '“Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur”.'
+        testimonial: '“I was impressed by the state-of-the-art equipment and the expertise of the medical team. Their comprehensive approach ensured I got the accurate diagnosis and treatment I needed.”'
     },
     {
         id: 3,
         name: 'Jane Smith',
-        position: 'CTO at TechCorp',
         photo: 'https://images.pexels.com/photos/10031556/pexels-photo-10031556.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        testimonial: '“Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur”.'
+        testimonial: '“The personalized care and attention I received were outstanding. The staff went above and beyond to make sure I was comfortable and well-informed throughout the diagnostic process.”'
     }
 ];
 
-const Recomendation = () => {
+
+const Testiminials = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [direction, setDirection] = useState('right');
     const [animate, setAnimate] = useState(false);
@@ -147,7 +145,6 @@ const Recomendation = () => {
                         <div className={`mt-2 md:mx-6 ${animate ? (direction === 'right' ? 'slide-in-right' : 'slide-in-left') : ''}`}>
                             <div>
                                 <p className="text-xl racking-tight text-white font-poppins font-semibold">{currentTestimonial.name}</p>
-                                <p className="opacity-70">{currentTestimonial.position}</p>
                             </div>
                             <p className="mt-4 text-lg leading-relaxed font-montserrat text-white md:text-xl">
                                 {currentTestimonial.testimonial}
@@ -180,4 +177,4 @@ const Recomendation = () => {
     );
 };
 
-export default Recomendation;
+export default Testiminials;

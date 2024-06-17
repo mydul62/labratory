@@ -28,7 +28,7 @@ const handleDashboard =()=>{
      <div className=" flex lg:hidden   shadow-sm  justify-between py-4 border-b border ">
   <div><h2 className=" md:ml-16 ml-3 font-Lora text-2xl italic">LabRatory</h2></div>
   {
-  dashboard?<FaBars className="lg:hidden mr-3" onClick={ handleDashboard} ></FaBars>: <RxCross1 className="lg:hidden" onClick={ handleDashboard}  />
+  dashboard?<FaBars className="lg:hidden mr-6" onClick={ handleDashboard} size={30} ></FaBars>: <RxCross1 size={30} className="lg:hidden mr-6" onClick={ handleDashboard}  />
   }
   </div> 
   <aside className="flex  rounded-md">
