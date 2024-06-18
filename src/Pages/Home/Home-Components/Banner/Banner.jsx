@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../../../../Hooks/useAxiosCommon";
 
 const Banner = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosCommon= useAxiosCommon()
 
   const isActive = true;
 
@@ -18,7 +18,7 @@ const Banner = () => {
   const { data: banner = {}, refetch } = useQuery({
     queryKey: ['banners', isActive],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/all_banners/banners/${isActive}`);
+      const { data } = await axiosCommon.get(`/all_banners/banners/${isActive}`);
       return data;
     }
   });

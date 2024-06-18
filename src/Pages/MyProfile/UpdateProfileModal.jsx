@@ -14,9 +14,11 @@ import useAxiosCommon from '../../Hooks/useAxiosCommon';
 import useAuthProvider from '../../Hooks/useAuthProvider';
 import { FaHome } from "react-icons/fa";
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
 
 const UpdateProfileModal = ({ setIsEditModalOpen, isOpen,refetch,closeModal }) => {
 const axiosCommon = useAxiosCommon()
+const axiosSecure = useAxiosSecure()
 const {user}= useAuthProvider()
 const email = user.email;
 
@@ -70,7 +72,7 @@ console.log(userInformations);
       }
     }
     const updateInfo = { userName, bloodGrupe, district, upazilla, imageUrl };
-        const {data} = await axiosCommon.patch(`/allusers/Updates/update/${email}`,updateInfo);
+        const {data} = await axiosSecure.patch(`/allusers/Updates/update/${email}`,updateInfo);
         if(data.acknowledged){
           refetch()
           closeModal()

@@ -29,7 +29,7 @@ const ContactPage = () => {
                 </div>
                 <img
                     className=" w-full min-h-[300px] mt-10 rounded-lg lg:h-96"
-                    src="https://img.freepik.com/free-photo/close-up-medical-team-ready-work_23-2149152537.jpg?t=st=1718220825~exp=1718224425~hmac=b1393dd8b42a528895eac76f9aa5bf05c469a44b714282d82193c8004392ae30&w=1380"
+                    src="https://img.freepik.com/free-photo/medium-shot-scientists-posing-together_23-2148969982.jpg?t=st=1718704771~exp=1718705371~hmac=f2c01ac7c57be4586e4d608456cdf6fd09fce207500a1ef910a7233553899f66"
                     alt=""
                 />
                 <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3 sm:grid-cols-2">

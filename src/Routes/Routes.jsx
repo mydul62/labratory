@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/testdetail/:id",  
-        element: <TestDetails />
+        element:<PriveteRoutes> <TestDetails /></PriveteRoutes>
       },
       {
         path: "/contactus",
@@ -70,17 +70,18 @@ export const router = createBrowserRouter([
     element: <PriveteRoutes><DashBoard /></PriveteRoutes>,
     children: [
       {
-        index:true,
+        index: true,
+        element: <PriveteRoutes><Profile></Profile></PriveteRoutes>
+      },
+      {
+        path:'admindashboard',
         element: <PriveteRoutes><AdminDeshBoard></AdminDeshBoard></PriveteRoutes>
       },
       {
         path: 'alltest',
         element: <PriveteRoutes><AllServiceData></AllServiceData></PriveteRoutes>
       },
-      {
-        path: 'profile',
-        element: <PriveteRoutes><Profile></Profile></PriveteRoutes>
-      },
+      
       {
         path: 'manageusers',
         element: <PriveteRoutes><ManageUser></ManageUser></PriveteRoutes>

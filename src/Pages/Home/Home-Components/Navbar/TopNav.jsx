@@ -18,7 +18,6 @@ const { data:userInformations} = useQuery({
     return data;
   },
 });
-console.log(userInformations);
 
   return (
     <div className=" bg-white">

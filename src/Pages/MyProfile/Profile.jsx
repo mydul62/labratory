@@ -36,7 +36,7 @@ const Profile = () => {
       return data;
     },
   });
-
+console.log(userInformations);
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-70px)] bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg max-w-[800px] w-full p-6">

@@ -99,7 +99,7 @@ const Navbar = () => {
                About Us
               </NavLink>
               <div onClick={() => setIsOpen(!isOpen)} className=' flex justify-center py-6 items-center'>
-              <Link to={'dashboard'}>
+              <Link to={'/dashboard'}>
               <button className='hover:bg-white lg:hidden lg:btn-lg btn-sm hover:text-black btn flex justify-center items-center text-white bg-[#00d2d3] border-none outline-none'>DashBoard <MdOutlineArrowRightAlt className='' size={20} />
               </button>
               </Link>

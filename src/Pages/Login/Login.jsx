@@ -17,7 +17,6 @@ const pathform = location?.state || "/Dashboard";
         SignInWithPassword(email, password)
             .then(response => {
                 navigate(pathform);
-                console.log('User signed in successfully', response);
             })
             .catch(error => {
                 console.error('Error signing in', error);

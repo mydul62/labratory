@@ -4,11 +4,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AddTest = () => {
   const [startDate, setStartDate] = useState(new Date());
   const formatteddate = startDate.toISOString().split('T')[0];
  const axiosCommon = useAxiosCommon()
+ const axiosSecure=useAxiosSecure()
   const handleServiceAdd = async (e) => {
     e.preventDefault();
 
@@ -46,7 +48,7 @@ const AddTest = () => {
       category
     };
      const postService = async()=>{
-      const {data}= await axiosCommon.post("/alltest", service)
+      const {data}= await axiosSecure.post("/alltest", service)
       if(data.insertedId){
         Swal.fire({
           position: "center",

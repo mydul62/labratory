@@ -5,8 +5,8 @@ import { auth } from "../../Firebase/firebase-config";
 import { updateProfile } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import axios from 'axios'
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAxiosCommon from "../../Hooks/useAxiosCommon";
+import Swal from "sweetalert2";
 const Registration = () => {
   const { registerWithPassword } = useAuthProvider();
   const navigate = useNavigate();
@@ -14,14 +14,14 @@ const Registration = () => {
    const {data:districs}=useQuery({
    queryKey:"districts",
    queryFn:async()=>{
-   const {data}=await axios.get("http://localhost:5000/district");
+   const {data}=await useAxiosCommon.get("/district");
    return data;
    }
    })
    const {data:upazillas}=useQuery({
    queryKey:"upazillas",
    queryFn:async()=>{
-   const {data}=await axios.get("http://localhost:5000/upazillas");
+   const {data}=await useAxiosCommon.get("/upazillas");
    return data;
    }
    })
@@ -62,12 +62,17 @@ const Registration = () => {
         })
           .then(() => {
             const userInfo = {name: userName, emailAdress, bloodGrupe, districs, upazella:upazilas,image:data.data.display_url,status: 'active',role: 'user'};
+            console.log(userInfo);
             axiosCommon.post("/allusers", userInfo)
             .then(res => {
               console.log(res.data);
+              if(data.insertedId){
+                Swal.fire("Registered successfully");
+              }
             })
             .catch(error => {
               console.error('Error occurred:', error);
+              Swal.fire("Something wrong");
             });
             alert("Registration Successful");
             navigate('/');

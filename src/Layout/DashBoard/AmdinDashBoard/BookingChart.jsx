@@ -18,7 +18,7 @@ const axiosCommon = useAxiosCommon()
 
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer className="min-h-[calc(100vh-400px)] lg:min-h-full" width="100%" height="100%">
     <BarChart
       width={500}
       height={300}

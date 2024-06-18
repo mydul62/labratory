@@ -37,7 +37,7 @@ const AdminDeshBoard = () => {
     
   return (
     <div className="container mx-auto p-4  rounded-md">
-      <div className="flex justify-center gap-4 items-center  mb-4">
+      <div className="flex flex-col lg:flex-row  justify-center gap-4 items-center  mb-4">
         <div className=" bg-base-100 hover:scale-105 duration-700 p-4 rounded-l-[10px] shadow-sm border-2 flex flex-col justify-center items-center h-40 w-full">
           <h1 className="text-3xl  font-bold">Total Rerservations</h1>
           <h3 className="text-2xl  font-bold">{Datas?.length}</h3>
@@ -52,12 +52,12 @@ const AdminDeshBoard = () => {
         </div>
       </div>
 
-      <div className=' flex gap-3 rounded-md justify-between h-[calc(100vh-270px)]'>
-      <div className=' w-[70%] bg-base-100 shadow-sm hover:scale-105 duration-700 p-4 rounded-[10px] border-2 '>
+      <div className=' flex flex-col lg:flex-row gap-3  rounded-md justify-between h-[calc(100vh-270px)]'>
+      <div className=' lg:w-[70%] lg:mb-4 bg-base-100 lg:h-full h-screen shadow-sm hover:scale-105 duration-700 p-4 rounded-[10px] border-2 '>
       
       <BookingChart></BookingChart>
       </div>
-      <div className=' h-[calc(100vh-270px)] bg-base-100 hover:scale-105 duration-700 p-4 rounded-[10px] shadow-sm border-2 w-[30%] '>
+      <div className=' h-[calc(100vh-270px)] bg-base-100 hover:scale-105 duration-700 p-4 rounded-[10px] shadow-sm border-2 lg:w-[30%] '>
 
          <div className=' ml-12 mt-6 space-y-6 -mb-16'>
          <h1 className=' text-2xl font-medium font-Lora'>•Panding : {perCentOfPanding}%</h1>
