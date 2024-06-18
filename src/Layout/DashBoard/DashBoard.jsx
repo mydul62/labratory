@@ -7,14 +7,28 @@ import AllUserRoutes from "./AllUserRoutes/AllUserRoutes";
 import AllAdminRoutes from "./AllAdminRoutes/AllAdminRoutes";
 import useAdmin from "../../AdminHooks/useAdmin";
 import { CgProfile } from "react-icons/cg";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosCommon from "../../Hooks/useAxiosCommon";
 
 const DashBoard = () => {
 const [dashboard,setDashboard]=useState(true)
 const {user,logout}=useAuthProvider()
+const axiosSecure=useAxiosCommon()
+const email = user.email;
  const {admin}= useAdmin()
 const handleDashboard =()=>{
   setDashboard(!dashboard);
 }
+
+const { data: userInformations=[] ,refetch} = useQuery({
+    queryKey: ["userInformations",email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/allusers/email/${email}`);
+      return data;
+    },
+  });
+  console.log(userInformations);
+
   return (
   <div>
      <div className=" flex lg:hidden   shadow-sm  justify-between py-4 border-b border ">
@@ -51,7 +65,7 @@ const handleDashboard =()=>{
   
           <div className="flex flex-col items-center mt-4  space-y-4">
               <a href="#">
-                  <img className="object-cover w-8 h-8 rounded-lg" src={user?.photoURL} alt="avatar" />
+                  <img className="object-cover w-8 h-8 rounded-lg" src={userInformations?.image} alt="avatar" />
               </a>
   
               <button onClick={()=>logout()} href="#" className="text-gray-500 transition-colors duration-200 rotate-180 dark:text-gray-400 rtl:rotate-0 hover:text-blue-500 dark:hover:text-blue-400">

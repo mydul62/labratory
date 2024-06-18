@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-[#EFF6FF] dark:bg-gray-900 ">
@@ -8,9 +10,9 @@ const Footer = () => {
           </h1>
 
           <div className="mt-6 md:mx-3 shrink-0 md:mt-0 md:w-auto">
-            <a
+            <Link to={'/registration'}
               href="#"
-              className="inline-flex items-center justify-center w-full px-4 py-2 text-sm text-white duration-300 bg-gray-200 rounded-lg gap-x-3 hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+              className="inline-flex bg-black items-center justify-center w-full px-4 py-2 text-sm text-white duration-300  rounded-lg gap-x-3 focus:ring  focus:ring-opacity-80"
             >
               <span>Sign Up Now</span>
 
@@ -28,7 +30,7 @@ const Footer = () => {
                   d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -41,30 +43,30 @@ const Footer = () => {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <a
+              <Link to={'/'}
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Home
-              </a>
-              <a
+              </Link>
+              <Link to={'/aboutus'}
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Who We Are
-              </a>
-              <a
+              </Link>
+              <Link to={'/alltest'}
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Our Philosophy
-              </a>
+                All service
+              </Link>
             </div>
           </div>
 
           <div>
             <p className="font-semibold text-gray-800 dark:text-white">
-              Industries
+              Tests
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
@@ -72,19 +74,19 @@ const Footer = () => {
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Retail & E-Commerce
+                Thyroid Function Test
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Information Technology
+                X-Ray Chest
               </a>
               <a
                 href="#"
                 className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Finance & Insurance
+               Echocardiogram
               </a>
             </div>
           </div>

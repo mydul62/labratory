@@ -3,6 +3,8 @@ import FeaturesText from "./Home-Components/Featurestest/FeaturesText";
 import Promotionals from "./Home-Components/promotional/Promotionals";
 import WeProvide from "./Home-Components/WeProvide/WeProvide";
 import Testiminials from "./Home-Components/testimonial/Testiminials";
+import Recoment from "./Home-Components/Recoment/Recoment";
+
 
 const Home = () => {
   return (
@@ -18,6 +20,9 @@ const Home = () => {
     </div>
     <div>
     <Promotionals></Promotionals>
+    </div>
+    <div>
+    <Recoment></Recoment>
     </div>
     <div>
 <Testiminials></Testiminials>    
