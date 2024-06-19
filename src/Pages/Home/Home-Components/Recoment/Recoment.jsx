@@ -49,7 +49,7 @@ const axiosCommon = useAxiosCommon()
           },
         }}
         modules={[Autoplay]}
-        className="mySwiper max-w-7xl mx-auto"
+        className="mySwiper max-w-7xl w-[90%] mx-auto"
       >
       {
       

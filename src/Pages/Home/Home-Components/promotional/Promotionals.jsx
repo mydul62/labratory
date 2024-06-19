@@ -23,8 +23,8 @@ const Reconamdations = () => {
           </div>
         </div>
 
-        <div className="flex items-center rounded-md justify-end w-full mt-6 lg:mt-0 lg:w-1/2">
-          <img className="max-w-[500px] rounded-lg max-h-[400px] lg:max-w-3xl" src="https://i.ibb.co/6m3x1x3/2234-R0l-VIEFOTi-Aw-Njkt-Mj-E.jpg" alt="Catalogue-pana.svg" />
+        <div className="flex items-center rounded-md justify-center  lg:justify-end w-full mt-6 lg:mt-0 lg:w-1/2">
+          <img className="max-w-[500px] w-full  rounded-lg max-h-[400px] lg:max-w-3xl" src="https://i.ibb.co/6m3x1x3/2234-R0l-VIEFOTi-Aw-Njkt-Mj-E.jpg" alt="Catalogue-pana.svg" />
         </div>
       </div>
     </div>

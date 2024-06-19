@@ -1,10 +1,10 @@
 import { FaTimes, FaUser } from "react-icons/fa";
 import { IoTimeOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuthProvider from "../../Hooks/useAuthProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TestModal from "./TestModal/TestModal";
 
 const TestDetails = () => {
@@ -13,7 +13,7 @@ const TestDetails = () => {
  const email = user?.email;
  let [isOpen, setIsEditModalOpen] = useState(false);
  const [modalInfo,setModalInfo]=useState()
- 
+ const location = useLocation()
  
  
  const { data:userInformations} = useQuery({
@@ -51,7 +51,7 @@ const {data:serviceData,refetch}=useQuery({
   const handleBookService = (id)=>{
     open(id)
   }
- 
+
   return (
    <div >
     <div
